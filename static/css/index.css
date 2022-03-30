@@ -1,0 +1,26 @@
+body{
+    box-sizing: border-box;
+}
+.fullbody{
+    display: flex;
+}
+.navbar{
+    background-color: #868E27;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+}
+footer{
+    background-color: #868E27;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 10px;
+}
+.nav-list{
+    padding: 10px 20px 10px 20px;
+}
+.nav-list a{
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 20px;
+}
