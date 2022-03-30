@@ -47,8 +47,32 @@ nav{
 .content{
     padding: 15px;
     width: 85%;
-    background-color: aqua;
 }
+.flex_forms{
+    display: flex;
+    justify-content: space-between;
+}
+.flex_forms .form-group{
+    width: 45%;
+}
+.form-group{
+    margin-top: 10px;
+}
+#submitbtn{
+    background-color: #868E27;
+}
+label{
+    color: #868E27;
+    font-weight: bold;
+}
+#fullnames,#emailadress,#phonenumber,#userpassword{
+    border-color: #868E27;
+}
+::placeholder{
+    color: #868E27 !important;
+}
+
+
 @media screen and (max-width: 700px){
     .nav_name{
         display: none;
