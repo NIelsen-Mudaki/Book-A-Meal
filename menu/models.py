@@ -7,7 +7,7 @@ class Menu(models.Model):
     price = models.FloatField()
     description = models.CharField(max_length=255)
     status = models.BooleanField(default=True)
-    image = models.CloudinaryField('image')
+    image = CloudinaryField('image')
 
     class Meta:
         db_table = 'Menu'
