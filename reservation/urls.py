@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from login.views import login_view,resetpass_view,logout_view
+from login.views import login_view,resetpass_view,logout_view,delete_view
 from caterers.views import manageadmins_view
 from dashboard.views import dashboard_view
 urlpatterns = [
@@ -25,6 +25,7 @@ urlpatterns = [
     path('reset_password/',resetpass_view, name="reset"),
     path('dashboard/',dashboard_view, name="dashboard"),
     path('logout_user/',logout_view, name="logout"),
+    path('delete_user/<int:id>/',delete_view, name="delete"),
     path('manage-caterers/',manageadmins_view, name="managecaters"),
     path('', include('orders.urls')),
     path('', include('sales.urls')),
