@@ -15,8 +15,7 @@ const ValidateLogin = () =>{
             localStorage.setItem("useremail", useremail.value.trim())
             localStorage.setItem("password", password.value.trim())
         }else{
-            alert("not checked");
-            return false;
+
         }
     }
 }

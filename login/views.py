@@ -8,9 +8,9 @@ def login_view(request):
     if request.method == 'POST':
         useremail = request.POST['useremail']
         password = request.POST['password']
-        checkpass = Customer.objects.filter(useremails = useremail)
+        checkpass = Customer.objects.filter(email = useremail)
         if checkpass.exists():
-            getuser = Customer.objects.get(useremails = useremail)
+            getuser = Customer.objects.get(email = useremail)
             passwords = check_password(password, getuser.password)
             if passwords:
                 response = redirect('/admins/')
@@ -33,9 +33,9 @@ def resetpass_view(request):
     if request.method == 'POST':
         useremail = request.POST['useremails']
         password = request.POST['passwords']
-        checkpass = Customer.objects.filter(useremails = useremail)
+        checkpass = Customer.objects.filter(email = useremail)
         if checkpass.exists():
-            getuser = Customer.objects.get(useremails = useremail)
+            getuser = Customer.objects.get(email = useremail)
             getuser.password = make_password(password)
             getuser.save()
             success = 'password reset successfull.'
