@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Menu(models.Model):
@@ -6,7 +7,7 @@ class Menu(models.Model):
     price = models.FloatField()
     description = models.CharField(max_length=255)
     status = models.BooleanField(default=True)
-    image = models.ImageField()
+    image = models.CloudinaryField('image')
 
     class Meta:
         db_table = 'Menu'
