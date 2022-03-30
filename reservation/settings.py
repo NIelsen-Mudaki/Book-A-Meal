@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'menu',
     'orders',
     'sales',
+    'django_bootstrap5'
 ]
 
 MIDDLEWARE = [
