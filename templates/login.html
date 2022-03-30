@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{%  static 'fontawesome/css/all.css' %}">
+    <script src="{% static 'fontawesome/js/all.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <script src="{% static 'js/auth.js' %}"></script>
+    <title>{{title}}</title>
+</head>
+<body>
+    <div class="loginform">
+        <form action="{% url 'logins' %}" method="post">{% csrf_token %}
+             <div class="form-title">Book-A-Meal</div>
+             <div class="form-group">
+                <div class="text-danger text-center">{{ errors }}</div>
+            </div>
+             <div class="form-input">
+                 <div class="form-group">
+                     <label for="useremail">Email Adress</label>
+                     <input type="email" name="useremail" id="useremail" oninput="removeError(this.id)" class="form-control shadow-none" autocomplete="off" placeholder="Enter email adress">
+                 </div>
+                 <div class="form-group" id="formgroups">
+                     <label for="password">Password</label>
+                    <input type="password" name="password" id="password" oninput="removeError(this.id)" class="form-control shadow-none" autocomplete="off" placeholder="Enter password">
+                    <span><i class="fa-solid fa-eye" onclick="ShowHidePassword()"></i></span>
+                </div>
+                <div class="flex_inputs">
+                    <div class="form-group">
+                        <input type="checkbox" name="rememberme" id="rememberme"> Remember Me
+                    </div>
+                    <div class="form-group">
+                        <a href="{% url 'reset' %}">Forget Password?</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Sign In" class="btn btn-dark text-light" id="submitbtn" onclick="return ValidateLogin()">
+                </div>
+             </div>
+        </form>
+    </div>
+</body>
+</html>

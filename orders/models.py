@@ -6,7 +6,7 @@ from customer.models import Customer
 class Orders(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
     menu_id = models.ForeignKey(Menu, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=1)
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
     order_status = models.CharField(max_length=255,default='pending')
 
@@ -15,4 +15,12 @@ class Orders(models.Model):
         db_table = 'Orders'
 
     def __str__(self):
-        return self.order_id
+        return self.order_status
+
+    @staticmethod
+    def get_orders_by_customer(customer_id):
+        return Orders.objects.filter(customer_id=customer_id).order_by('order_date')
+
+    @staticmethod
+    def get_all_orders():
+        return Orders.objects.all().order_by('order_date')
