@@ -7,8 +7,10 @@
         <div class="content">
             <div class="current_tab">Manage Admin /</div>
             <div class="addadmins">
-                <form action="" method="post">
+                <form action="{% url 'managecaters' %}" method="post">
                     {% csrf_token %}
+                    <div class="text-success">{{ success }}</div>
+                    <div class="text-danger">{{ errors }}</div>
                     <div class="flex_forms">
                         <div class="form-group">
                             <label for="fullnames">FullName</label>
@@ -33,6 +35,33 @@
                         <input type="submit" value="Add User" class="btn text-light" id="submitbtn" onclick="return ValidateSignup()">
                     </div>
                 </form>
+            </div>
+            <div class="added_admins">
+                <div class="current_tab">Added Admins</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>FullName</th>
+                            <th>Email Adress</th>
+                            <th>Phone Number</th>
+                            <th>Admin Role</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if users != 'nouser' %}
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ user.customer_name }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.phone }}</td>
+                                    <td>{{ user.is_Caterer }}</td>
+                                    <td><div class="flex_button"><a href="" id="delete">Delete</a> <a href="" id="edit">Edit</a></div></td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -71,8 +71,24 @@ label{
 ::placeholder{
     color: #868E27 !important;
 }
-
-
+#delete{
+    color: #FFFFFF;
+    background-color: red;
+    text-decoration: none;
+    font-size:13px;
+    padding:6px;
+    font-weight:bold;
+    border-radius:3px;
+}
+#edit{
+    color: #FFFFFF;
+    background-color: blue;
+    text-decoration: none;
+    font-size:13px;
+    padding:6px;
+    font-weight:bold;
+    border-radius:3px;
+}
 @media screen and (max-width: 700px){
     .nav_name{
         display: none;
