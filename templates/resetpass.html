@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{%  static 'fontawesome/css/all.css' %}">
+    <script src="{% static 'fontawesome/js/all.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <script src="{% static 'js/auth.js' %}"></script>
+    <title>{{title}}</title>
+</head>
+<body>
+    <div class="loginform">
+        <form action="{% url 'reset' %}" method="post">{% csrf_token %}
+             <div class="form-title">Book-A-Meal</div>
+             <div class="form-group">
+                 <div class="text-success text-center">{{ success }}</div>
+             </div>
+             <div class="form-group">
+                <div class="text-danger text-center">{{ errors }}</div>
+            </div>
+             <div class="form-input">
+                 <div class="form-group">
+                     <label for="useremail">Email Adress</label>
+                     <input type="email" name="useremails" id="useremails" oninput="removeError(this.id)" class="form-control shadow-none" autocomplete="off" placeholder="Enter email adress">
+                 </div>
+                 <div class="form-group" id="formgroups">
+                     <label for="password">Password</label>
+                    <input type="password" name="passwords" id="passwords" oninput="removeError(this.id)" class="form-control shadow-none" autocomplete="off" placeholder="Enter password">
+                    <span><i class="fa-solid fa-eye" onclick="resetShowHidePassword()"></i></span>
+                </div>
+                <div class="form-group" id="formgroups">
+                    <label for="cpasspassword">Confirm Password</label>
+                   <input type="password" name="cpasspassword" id="cpasspassword" oninput="removeError(this.id)" class="form-control shadow-none" autocomplete="off" placeholder="Confirm password">
+                   <span><i class="fa-solid fa-eye" onclick="confShowHidePassword()"></i></span>
+               </div>
+                <div class="flex_inputs">
+                    <div class="form-group">
+                        <a href="{% url 'logins' %}">Go Login?</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Reset Password" class="btn btn-dark text-light" id="submitbtn" onclick="return ValidateReset()">
+                </div>
+             </div>
+        </form>
+    </div>
+</body>
+</html>
