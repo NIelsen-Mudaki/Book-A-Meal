@@ -44,3 +44,49 @@ const getdetails = () =>{
 setTimeout("getdetails", 1000);
 }
 window.onload = getdetails;
+
+
+
+const resetShowHidePassword = () =>{
+    let target = document.getElementById("passwords");
+    if(target.type == "password"){
+        target.type = "text";
+    }else{
+        target.type="password";
+    }
+}
+
+
+const confShowHidePassword = () =>{
+    let target = document.getElementById("cpasspassword");
+    if(target.type == "password"){
+        target.type = "text";
+    }else{
+        target.type="password";
+    }
+}
+
+
+const ValidateReset = () =>{
+    let useremail = document.getElementById("useremails");
+    let password = document.getElementById("passwords");
+    let confirmpass = document.getElementById("cpasspassword");
+    if(useremail.value.trim() === '' || password.value.trim() === '' || confirmpass.value.trim() === ''){
+        if(useremail.value.trim() === ''){
+            useremail.style.borderColor = "red";
+            return false;
+        }else if(password.value.trim() === ''){
+            password.style.borderColor = "red";
+            return false;
+        }else{
+            confirmpass.style.borderColor = "red";
+            return false;
+        }
+    }else{
+        if(password.value.trim() != confirmpass.value.trim()){
+            password.style.borderColor = "red";
+            confirmpass.style.borderColor = "red";
+            return false;
+        }
+    }
+}

@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="loginform">
-        <form action="" method="post">{% csrf_token %}
+        <form action="{% url 'logins' %}" method="post">{% csrf_token %}
              <div class="form-title">Book-A-Meal</div>
              <div class="form-input">
                  <div class="form-group">
@@ -31,7 +31,7 @@
                         <input type="checkbox" name="rememberme" id="rememberme"> Remember Me
                     </div>
                     <div class="form-group">
-                        <a href="">Forget Password?</a>
+                        <a href="{% url 'reset' %}">Forget Password?</a>
                     </div>
                 </div>
                 <div class="form-group">
