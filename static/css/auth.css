@@ -6,6 +6,7 @@ body{
     margin: auto;
     margin-top: 100px;
     padding-bottom: 10px;
+    box-shadow: 3px 3px 4px rgba(176, 187, 25, 0.2);
 }
 .form-title{
     background-color: #868E27;
@@ -40,7 +41,7 @@ label{
     color: #868E27;
 }
 ::placeholder{
-    color: #868E27;
+    color: #868E27 !important;
 }
 #formgroups{
     position: relative;
@@ -50,5 +51,12 @@ label{
     right: 20px;
     top: 35px;
     cursor: pointer;
+    color: #868E27;
+}
+.flex_inputs{
+    color: #868E27;
+    font-weight: bold;
+}
+.flex_inputs a{
     color: #868E27;
 }

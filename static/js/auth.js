@@ -12,8 +12,8 @@ const ValidateLogin = () =>{
         }
     }else{
         if(rememberme.checked){
-            alert("checked");
-            return false;
+            localStorage.setItem("useremail", useremail.value.trim())
+            localStorage.setItem("password", password.value.trim())
         }else{
             alert("not checked");
             return false;
@@ -33,3 +33,14 @@ const ShowHidePassword = () =>{
         target.type="password";
     }
 }
+
+const getdetails = () =>{
+    let uname = localStorage.getItem("useremail");
+    let pname = localStorage.getItem("password");
+    if(uname != ''){
+        document.getElementById("useremail").value= uname;
+        document.getElementById("password").value = pname;
+    }
+setTimeout("getdetails", 1000);
+}
+window.onload = getdetails;
