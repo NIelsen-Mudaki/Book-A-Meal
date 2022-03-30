@@ -19,12 +19,12 @@
              <div class="form-input">
                  <div class="form-group">
                      <label for="useremail">Email Adress</label>
-                     <input type="email" name="useremail" id="useremail" class="form-control" placeholder="Enter email adress">
+                     <input type="email" name="useremail" id="useremail" oninput="removeError(this.id)" class="form-control shadow-none" autocomplete="off" placeholder="Enter email adress">
                  </div>
-                 <div class="form-group">
+                 <div class="form-group" id="formgroups">
                      <label for="password">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
-                    <span><i class="fa-solid fa-eye"></i></span>
+                    <input type="password" name="password" id="password" oninput="removeError(this.id)" class="form-control shadow-none" autocomplete="off" placeholder="Enter password">
+                    <span><i class="fa-solid fa-eye" onclick="ShowHidePassword()"></i></span>
                 </div>
                 <div class="flex_inputs">
                     <div class="form-group">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Sign In" class="btn btn-dark text-light">
+                    <input type="submit" value="Sign In" class="btn btn-dark text-light" id="submitbtn" onclick="return ValidateLogin()">
                 </div>
              </div>
         </form>

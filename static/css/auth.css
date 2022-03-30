@@ -5,6 +5,7 @@ body{
     width: 30%;
     margin: auto;
     margin-top: 100px;
+    padding-bottom: 10px;
 }
 .form-title{
     background-color: #868E27;
@@ -23,4 +24,31 @@ body{
 }
 .form-input{
     margin: 10px;
+}
+#submitbtn{
+    background-color: #868E27 !important;
+    outline: none !important;
+    border: none;
+}
+#password,#useremail,#rememberme{
+    border: 1px solid #868E27;
+    outline: none;
+    font-size: 16px;
+}
+label{
+    font-weight: bold;
+    color: #868E27;
+}
+::placeholder{
+    color: #868E27;
+}
+#formgroups{
+    position: relative;
+}
+#formgroups span{
+    position: absolute;
+    right: 20px;
+    top: 35px;
+    cursor: pointer;
+    color: #868E27;
 }
