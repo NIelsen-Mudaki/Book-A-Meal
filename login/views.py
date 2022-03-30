@@ -13,7 +13,7 @@ def login_view(request):
             getuser = Customer.objects.get(email = useremail)
             passwords = check_password(password, getuser.password)
             if passwords:
-                response = redirect('/admins/')
+                response = redirect('/dashboard/')
                 response.set_cookie("users",useremail)
                 return response
             else:
