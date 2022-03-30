@@ -1,12 +1,13 @@
 body{
     box-sizing: border-box;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 .fullbody{
     display: flex;
 }
 .navbar{
     background-color: #868E27;
-    width: 200px;
+    width: 15%;
     margin: 0;
     padding: 0;
 }
@@ -16,11 +17,39 @@ footer{
     text-align: center;
     padding: 10px;
 }
-.nav-list{
-    padding: 10px 20px 10px 20px;
-}
-.nav-list a{
+.nav_link{
     text-decoration: none;
     color: #FFFFFF;
-    font-size: 20px;
+    font-size: 17px;
+}
+nav{
+    padding: 20px;
+}
+.nav_items{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+.nav_items:hover{
+    border-bottom: 2px solid #FFFFFF;
+}
+.nav_items:hover a{
+    color: #FFFFFF;
+}
+.nav_logo{
+    color: #FFFFFF;
+    font-weight: bold;
+}
+@media screen and (max-width: 700px){
+    .nav_name{
+        display: none;
+    }
+    .nav_items{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        margin: 0px;
+    }
+    .nav_items:hover{
+        border-bottom: 3px solid #FFFFFF;
+    }
 }
