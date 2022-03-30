@@ -7,3 +7,9 @@ class Menu(models.Model):
     description = models.CharField(max_length=255)
     status = models.BooleanField(default=True)
     image = models.ImageField()
+
+    class Meta:
+        db_table = 'Menu'
+
+    def __str__(self):
+        return self.meal

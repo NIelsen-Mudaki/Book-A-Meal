@@ -9,3 +9,10 @@ class Orders(models.Model):
     quantity = models.IntegerField()
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
     order_status = models.CharField(max_length=255,default='pending')
+
+
+    class Meta:
+        db_table = 'Orders'
+
+    def __str__(self):
+        return self.order_id
