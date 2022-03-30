@@ -1,0 +1,31 @@
+.card{
+width:50rem;
+margin:auto;
+
+}
+
+form .form-control{
+  margin-bottom: 2rem;
+  border-color: #868E27;
+  
+}
+
+form,.green{
+  color:#868E27;
+}
+
+.form-control:focus{
+  border-color: #868E27;
+  box-shadow: #868E27;
+}
+
+.form-control::placeholder{
+  color: #868E27;
+}
+
+.submit-menu{
+
+  background-color:#868E27;
+  color: white;
+
+}
