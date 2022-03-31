@@ -59,18 +59,21 @@ def menu(request):
 def create_menu(request):
   meal=request.POST.get('meal')
   print(meal)
+  target_date=request.COOKIES.get('activedate')
+  target_date_object=datetime.datetime.strptime(target_date,'%Y-%m-%d')
+  
+  print(target_date_object)
   if request.method=='POST':
     meal=request.POST.get('meal')
     additional_items=request.POST.get('additional')
     price=request.POST.get('price')
     description=request.POST.get('description')
     image=request.FILES['mealimage']
+    parent_menu_date=MenuDate.objects.filter(menu_date=target_date_object.date()).first()
+
     print(description)
 
-    new_menu=Menu(meal=meal,price=price,description=description,image=image)
-    print(request.FILES["mealimage"])
-    print(image)
-    print('jus done')
+    new_menu=Menu(meal=meal,price=price,description=description,image=image,menu_date=parent_menu_date)
     new_menu.save()
     # data={'success':'You have been successfully rated this project'}
     # return JsonResponse(data)
