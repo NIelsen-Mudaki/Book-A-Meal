@@ -1,48 +1,46 @@
 {%extends 'base.html'%}
 {% load filters %}
-<body>
-    {%block body%}
-    <div class="container">
-        <div class="border rounded p-4 m-4">
-                <p class="display-4 pl-4 ml-4 text-center">Your Orders</p>
-                <hr>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Item ID</th>
-                            <th>Meal Option</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Date</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                
-                        {% for order in orders %}
-                        <tr>
-                            <td>{{order.id}}</td>
-                            <td>{{order.menu_id.meal}}</td>
-                            <td>{{order.menu_id.price|currency}}</td>
-                            <td>{{order.quantity}}</td>
-                            <td>{{order.order_date}}</td>
-                            <td>{{order.quantity|product:order.menu_id.price|currency}}</td>
-                            
-                            {% if order.order_status == 'pending' %}
-                            <td><small class="btn bg-info shadow-none text-light">Pending</small></td>
-                            {%else%}
-                            <td><small class="btn btn-success">Fulfilled</small></td>
-                            {% endif %}
-                        </tr>
-
-                        {% endfor %}
-                        
-                    </tbody>
-                </table>
+{%block body%}
+<div class="navbar">{% include 'navbar.html' %}</div>
+<div class="border rounded p-4 m-4">
+        <p class="display-4 pl-4 ml-4 text-center">Your Orders</p>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Item ID</th>
+                    <th>Meal Option</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
             
-        </div>
-    </div>
-    {%endblock%}
-</body>
+            <tbody>
+        
+                {% for order in orders %}
+                <tr>
+                    <td>{{order.id}}</td>
+                    <td>{{order.menu_id.meal}}</td>
+                    <td>{{order.menu_id.price|currency}}</td>
+                    <td>{{order.quantity}}</td>
+                    <td>{{order.order_date}}</td>
+                    <td>{{order.quantity|product:order.menu_id.price|currency}}</td>
+                    
+                    {% if order.order_status == 'pending' %}
+                    <td><small class="btn bg-info shadow-none text-light">Pending</small></td>
+                    {%else%}
+                    <td><small class="btn btn-success">Fulfilled</small></td>
+                    {% endif %}
+                </tr>
+
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    
+</div>
+<div class="footer">{% include 'footer.html' %}</div>
+{%endblock%}
