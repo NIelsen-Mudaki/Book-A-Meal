@@ -6,6 +6,12 @@ import datetime
 # Create your views here.
 
 def menu(request):
+  try:
+      current_user = request.COOKIES['users']
+  except:
+      return redirect("/")
+  active_menu_items=Menu.get_active_menu_items()
+  inactive_menu_items=Menu.get_inactive_menu_items()
   
 
   current_date_str=request.COOKIES.get('activedate')

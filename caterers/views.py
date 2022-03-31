@@ -3,14 +3,14 @@ from customer.models import Customer
 from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 def manageadmins_view(request):
-    # try:
-    #     current_user = request.COOKIES['users']
-    # except:
-    #     return redirect("/")
+    try:
+        current_user = request.COOKIES['users']
+    except:
+        return redirect("/")
     errors = ''
     success = ''
     try:
-        users = Customer.objects.filter(is_Caterer=True).order_by('-id')[:5]
+        users = Customer.objects.filter(is_Caterer=True).order_by('-id')
     except:
         users = 'nouser'
     if request.method == 'POST':
