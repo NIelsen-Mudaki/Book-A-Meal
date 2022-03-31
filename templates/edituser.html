@@ -6,7 +6,7 @@
     <div class="fullbody">
         <div class="navbar">{% include 'navbar.html' %}</div>
         <div class="content">
-            <div class="current_tab">Manage Admin /</div>
+            <div class="current_tab">Manage Admin / Edit {{ users.fullname }}</div>
             <div class="addadmins">
                 <form action="{% url 'managecaters' %}" method="post">
                     {% csrf_token %}
