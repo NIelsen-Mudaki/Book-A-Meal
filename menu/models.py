@@ -30,3 +30,6 @@ class Menu(models.Model):
         self.save()
         return self
 
+    def delete_menu(self):
+        self.delete()
+        return f"{self} is deleted"

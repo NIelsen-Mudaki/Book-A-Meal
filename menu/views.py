@@ -47,3 +47,8 @@ def available(request,id):
 def make_unavailable(request):
   pass
 
+def delete_menu(request,id):
+  target_menu=Menu.objects.filter(id=id).first()
+  target_menu.delete_menu()
+  return redirect('menu')
+

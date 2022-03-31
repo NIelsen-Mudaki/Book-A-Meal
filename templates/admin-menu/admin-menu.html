@@ -25,6 +25,7 @@
   <input type="submit" value="Add">
   </form> -->
   <h2 class="p-3 green">Manage Menu</h2>
+  <h5 class="green p-3">New Menu Item</h5>
   <form action="{% url 'createmenu' %}" class="" id="menuform" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row p-3">
@@ -58,6 +59,7 @@
       <div class="col-12">
 
         <input type="submit" value="Add Menu" class="btn m-3 submit-menu mx-0" id="greensubmit">
+      
       </div>
     
     </div>
@@ -82,7 +84,7 @@
             <p>{{menu.description}}</p>
             <p>Ksh. {{menu.price}}</p>
             <a class="btn btn-secondary" href="{% url 'available' menu.id %}">Make Unavailable</a>
-            <button class="btn btn-danger">Delete</button>
+            <a class="btn btn-danger" href="{% url 'delete_menu' menu.id %}">Delete</a>
 
            </div>
            <div>
@@ -118,7 +120,8 @@
             <p>{{menu.description}}</p>
             <p>Ksh. {{menu.price}}</p>
             <a class="btn greensubmit" id="makeavailable" href="{% url 'available' menu.id %}">Make Available</a>
-            <button class="btn btn-danger">Delete</button>
+            <!-- <button class="btn btn-danger">Delete</button> -->
+            <a class="btn btn-danger" href="{% url 'delete_menu' menu.id %}">Delete</a>
 
            </div>
            <div>
