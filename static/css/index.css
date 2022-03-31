@@ -50,6 +50,7 @@ nav{
 }
 .flex_forms{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 .flex_forms .form-group{
