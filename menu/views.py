@@ -7,6 +7,23 @@ import datetime
 
 def menu(request):
   
+  try:
+    current_date_str=request.COOKIES.get('activedate')
+  except:
+    current_datetime=datetime.datetime.today()
+    current_date=current_datetime.date()
+
+    check_date=MenuDate.objects.filter(menu_date=current_date).first()
+    if not check_date:
+      new_menu_date=MenuDate(menu_date=current_date)
+      new_menu_date.save()
+    current_date_str=current_date.strftime('%Y-%m-%d')
+    response=redirect('menu')
+    response.set_cookie(key='activedate',value=menudate)
+    return response
+
+
+
   active_menu_items=Menu.get_active_menu_items()
   inactive_menu_items=Menu.get_inactive_menu_items()
 
@@ -14,19 +31,31 @@ def menu(request):
     menudate=request.POST.get('menudate')
     menudateobj=datetime.datetime.strptime(menudate,'%Y-%m-%d')
     selected_date=menudateobj.date()
-    new_menu_date=MenuDate(menu_date=selected_date)
-    new_menu_date.save()
+    check_date=MenuDate.objects.filter(menu_date=selected_date).first()
+    if not check_date:
+      new_menu_date=MenuDate(menu_date=selected_date)
+      new_menu_date.save()
 
-    print('we ran')
-
-  form=MenuForm()
-  context={
-    'form':form,
+    context={
     'activemenuitems':active_menu_items,
-    'inactivemenuitems':inactive_menu_items
-  }
-  return render(request,'admin-menu/admin-menu.html',context)
+    'inactivemenuitems':inactive_menu_items,
+    'menudate':menudate
 
+    }
+    print('we ran')
+    response=render(request,'admin-menu/admin-menu.html',context)
+    response.set_cookie(key='activedate',value=menudate)
+    return response
+
+
+  print(current_date_str)
+  context={
+    'activemenuitems':active_menu_items,
+    'inactivemenuitems':inactive_menu_items,
+    'menudate':current_date_str,
+    }
+  return render(request,'admin-menu/admin-menu.html',context)
+  
 def create_menu(request):
   meal=request.POST.get('meal')
   print(meal)
