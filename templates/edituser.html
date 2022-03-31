@@ -37,34 +37,7 @@
                     </div>
                 </form>
             </div>
-            <div class="added_admins">
-                <div class="current_tab">Added Admins</div>
-                <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>FullName</th>
-                            <th>Email Adress</th>
-                            <th>Phone Number</th>
-                            <th>Admin Role</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if users != 'nouser' %}
-                            {% for user in users %}
-                                <tr>
-                                    <td>{{ user.customer_name }}</td>
-                                    <td>{{ user.email }}</td>
-                                    <td>{{ user.phone }}</td>
-                                    <td>{{ user.is_Caterer }}</td>
-                                    <td><div class="flex_button"><a href="{% url 'delete' user.id %}" id="delete">Delete</a> <a href="" id="edit">Edit</a></div></td>
-                                </tr>
-                            {% endfor %}
-                        {% endif %}
-                    </tbody>
-                </table>
-            </div>
+            
             </div>
         </div>
     </div>

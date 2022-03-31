@@ -34,4 +34,13 @@ def manageadmins_view(request):
 
 
 def editusers_view(request, id):
-    return render(request, "edituser.html")
+    success = ''
+    errors = ''
+    users = Customer.objects.get(id = id)
+    context = {
+        'title' : 'BOOK-A-MEAL | EDIT - CATERER',
+        'errors':errors,
+        'success':success,
+        'users':users
+    }
+    return render(request, "edituser.html", context)
