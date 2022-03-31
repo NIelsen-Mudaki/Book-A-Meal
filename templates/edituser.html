@@ -6,7 +6,7 @@
     <div class="fullbody">
         <div class="navbar">{% include 'navbar.html' %}</div>
         <div class="content">
-            <div class="current_tab">Manage Admin / Edit {{ users.fullname }}</div>
+            <div class="current_tab">Manage Admin / Edit {{ users.customer_name }}</div>
             <div class="addadmins">
                 <form action="{% url 'managecaters' %}" method="post">
                     {% csrf_token %}
@@ -15,7 +15,7 @@
                     <div class="flex_forms">
                         <div class="form-group">
                             <label for="fullnames">FullName</label>
-                            <input type="text" name="fullnames" value="{{ users.fullname }}" autocomplete="off" oninput="removeError(this.id)" id="fullnames" class="form-control shadow-none" placeholder="Enter fullname">
+                            <input type="text" name="fullnames" value="{{ users.customer_name }}" autocomplete="off" oninput="removeError(this.id)" id="fullnames" class="form-control shadow-none" placeholder="Enter fullname">
                         </div>
                         <div class="form-group">
                             <label for="emailadress">Email Address</label>
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Add User" class="btn text-light" id="submitbtn" onclick="return ValidateSignup()">
+                        <input type="submit" value="Save Changes" class="btn text-light" id="submitbtn" onclick="return ValidateSignup()">
                     </div>
                 </form>
             </div>

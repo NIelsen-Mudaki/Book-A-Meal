@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from customer.models import Customer
 from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
@@ -37,10 +37,29 @@ def editusers_view(request, id):
     success = ''
     errors = ''
     users = Customer.objects.get(id = id)
+    
     context = {
         'title' : 'BOOK-A-MEAL | EDIT - CATERER',
         'errors':errors,
         'success':success,
         'users':users
     }
-    return render(request, "edituser.html", context)
+    response = render(request, "edituser.html", context)
+    response.set_cookie("editid", id)
+    return response
+
+def updateuser_view(request):
+    if request.method == 'POST':
+        fullnames = request.POST['fullnames']
+        emailadress = request.POST['emailadress']
+        phonenumber = request.POST['phonenumber']
+
+        userid = request.COOKIES['editid']
+        getusers = Customer.objects.get(id = userid)
+        getusers.customer_name = fullnames
+        getusers.email = emailadress
+        getusers.phone = phonenumber
+        getusers.save()
+        response = redirect('/manage-caterers/')
+        response.delete_cookie("editid")
+        return response
