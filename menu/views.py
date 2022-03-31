@@ -7,9 +7,9 @@ import datetime
 
 def menu(request):
   
-  try:
-    current_date_str=request.COOKIES.get('activedate')
-  except:
+
+  current_date_str=request.COOKIES.get('activedate')
+  if not current_date_str:
     current_datetime=datetime.datetime.today()
     current_date=current_datetime.date()
 
