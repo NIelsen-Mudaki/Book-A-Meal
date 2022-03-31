@@ -10,7 +10,7 @@ def manageadmins_view(request):
     errors = ''
     success = ''
     try:
-        users = Customer.objects.filter(is_Caterer=True).order_by('-id')[:5]
+        users = Customer.objects.filter(is_Caterer=True).order_by('-id')
     except:
         users = 'nouser'
     if request.method == 'POST':
