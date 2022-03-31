@@ -24,3 +24,9 @@ class Menu(models.Model):
     def get_inactive_menu_items(cls):
         return cls.objects.filter(status=False).all()
 
+
+    def change_status(self):
+        self.status=not self.status
+        self.save()
+        return self
+

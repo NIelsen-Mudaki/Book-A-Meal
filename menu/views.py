@@ -36,3 +36,14 @@ def create_menu(request):
     # data={'success':'You have been successfully rated this project'}
     # return JsonResponse(data)
     return redirect('menu')
+
+
+def available(request,id):
+  target_menu=Menu.objects.filter(id=id).first()
+  target_menu.change_status()
+
+  return redirect('menu')
+
+def make_unavailable(request):
+  pass
+
