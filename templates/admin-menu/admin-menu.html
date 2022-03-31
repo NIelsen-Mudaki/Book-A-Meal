@@ -86,7 +86,7 @@
             <h3>{{menu.meal}}</h3>
             <p>{{menu.description}}</p>
             <p>Ksh. {{menu.price}}</p>
-            <a class="btn btn-secondary" href="{% url 'available' menu.id %}">Make Unavailable</a>
+            <a class="btn btn-secondary" id="makeunavailable" name="makeunavailable" href="{% url 'make_unavailable' menu.id %}">Make Unavailable</a>
             <a class="btn btn-danger" href="{% url 'delete_menu' menu.id %}">Delete</a>
             <a class="btn" id="greenbtn" href="{% url 'editmenu' menu.id %}">Edit</a>
 
@@ -110,7 +110,7 @@
   {% endif %}
 
   <hr>
-  <h3 class="mt-3">Unavailable Meals</h3>
+  <h3 class="mt-3">Meals Selection</h3>
 
   {% if inactivemenuitems %}
   <div class="row">
