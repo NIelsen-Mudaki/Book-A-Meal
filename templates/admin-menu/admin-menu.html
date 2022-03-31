@@ -15,7 +15,7 @@
 <div class="navbar" id="navbarmenu align-items-start">{% include 'navbar.html' %}</div>
 <div class="main">
 <div class="container">  
-  <div class="card mt-5 menu-form-card">
+  <div class="card mt-5 menu-form-card border-0">
   <!-- <form action="" action="" class="p-3">
   {% csrf_token %}
 
@@ -24,16 +24,16 @@
   
   <input type="submit" value="Add">
   </form> -->
-  <h5 class="p-3 green">Manage Menu</h5>
+  <h2 class="p-3 green">Manage Menu</h2>
   <form action="{% url 'createmenu' %}" class="" id="menuform" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row p-3">
 
-      <div class="col-6">
+      <div class="col-12 col-lg-6">
       <label for="meal">Meal Items</label>
         <input type="text" name="meal" id="meal" class="form-control" placeholder="Main items (rice & meat)">
       </div>
-      <div class="col-6">
+      <div class="col-12 col-lg-6">
       <label for="additional">Additional Items</label>
 
         <input type="text" name="additional" id="additional" class="form-control" placeholder="Additional Items">
@@ -57,7 +57,7 @@
     </div>
       <div class="col-12">
 
-        <input type="submit" value="Add Menu" class="btn m-3 submit-menu" id="greensubmit">
+        <input type="submit" value="Add Menu" class="btn m-3 submit-menu mx-0" id="greensubmit">
       </div>
     
     </div>
