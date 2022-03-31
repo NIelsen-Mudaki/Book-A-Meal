@@ -6,12 +6,14 @@ from django.http import JsonResponse
 
 def menu(request):
   
-  if request.method=='POST':
-    pass
+  active_menu_items=Menu.get_active_menu_items()
+  inactive_menu_items=Menu.get_inactive_menu_items()
 
   form=MenuForm()
   context={
-    'form':form
+    'form':form,
+    'activemenuitems':active_menu_items,
+    'inactivemenuitems':inactive_menu_items
   }
   return render(request,'admin-menu/admin-menu.html',context)
 

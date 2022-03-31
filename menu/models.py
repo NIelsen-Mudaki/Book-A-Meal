@@ -14,3 +14,13 @@ class Menu(models.Model):
 
     def __str__(self):
         return self.meal
+    
+    @classmethod
+    def get_active_menu_items(cls):
+        return cls.objects.filter(status=True).all()
+
+
+    @classmethod
+    def get_inactive_menu_items(cls):
+        return cls.objects.filter(status=False).all()
+
