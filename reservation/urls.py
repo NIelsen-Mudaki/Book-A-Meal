@@ -31,5 +31,7 @@ urlpatterns = [
     path('updateuser/',updateuser_view, name="updateuser"),
     path('', include('orders.urls')),
     path('', include('sales.urls')),
+    #api urls
+    path('api/',include('api.urls'))
 
 ]
