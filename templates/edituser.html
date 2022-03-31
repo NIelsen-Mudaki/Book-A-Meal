@@ -8,7 +8,7 @@
         <div class="content">
             <div class="current_tab">Manage Admin / Edit {{ users.customer_name }}</div>
             <div class="addadmins">
-                <form action="{% url 'managecaters' %}" method="post">
+                <form action="{% url 'updateuser' %}" method="post">
                     {% csrf_token %}
                     <div class="text-success">{{ success }}</div>
                     <div class="text-danger">{{ errors }}</div>

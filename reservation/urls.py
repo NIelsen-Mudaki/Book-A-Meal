@@ -28,6 +28,7 @@ urlpatterns = [
     path('delete_user/<int:id>/',delete_view, name="delete"),
     path('manage-caterers/',manageadmins_view, name="managecaters"),
     path('edituser/<int:id>/',editusers_view, name="edituser"),
+    path('updateuser/',updateuser_view, name="updateuser"),
     path('', include('orders.urls')),
     path('', include('sales.urls')),
 
