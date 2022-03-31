@@ -30,3 +30,8 @@ def manageadmins_view(request):
         'users':users
     }
     return render(request, "manageadmins.html", context)
+
+
+
+def editusers_view(request, id):
+    return render(request, "edituser.html")
