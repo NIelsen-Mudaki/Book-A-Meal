@@ -6,33 +6,37 @@ register = template.Library()
 def currency(number):
     return "Kes "+str(number)
 
+@register.filter(name='product')
+def product(number , number1):
+    return number * number1
+
 @register.filter (name='is_in_cart')
-def is_in_cart(product, cart):
-    keys = cart.keys ()
+def is_in_cart(order):
+    keys = order.keys ()
     for id in keys:
-        if int (id) == product.id:
+        if int (id) == order.id:
             return True
     return False;
 
 
-@register.filter (name='cart_quantity')
-def cart_quantity(product, cart):
-    keys = cart.keys ()
-    for id in keys:
-        if int (id) == product.id:
-            return cart.get (id)
+@register.filter (name='quantity')
+def quantity(order):
+
+    for id in order:
+        if int (id) == order.id:
+            return order.get (id)
     return 0;
 
 
 @register.filter (name='sub_total')
-def sub_total(product, cart):
-    return product.price * cart_quantity (product, cart)
+def sub_total(order):
+    return order.price * quantity (order)
 
 
 @register.filter (name='grand_total')
-def grand_total(products):
+def grand_total(orders):
     sum = 0;
-    for p in products:
-        sum += sub_total (p, cart)
+    for order in orders:
+        sum += sub_total (order)
 
     return sum
