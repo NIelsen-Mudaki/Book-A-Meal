@@ -28,6 +28,10 @@ class Orders(models.Model):
         print(total)
         return total
         
+    @classmethod
+    def search_by_date(cls,search_term):
+        orders = cls.objects.filter(order_date__icontains=search_term)
+        return orders
 
 
 
@@ -38,4 +42,6 @@ class Orders(models.Model):
     @staticmethod
     def get_all_orders():
         return Orders.objects.all().order_by('order_date')
+
+    
 
