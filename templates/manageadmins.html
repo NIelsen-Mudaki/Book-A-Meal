@@ -2,6 +2,7 @@
 
 {% block title %} {{ title }} {% endblock %}
 {% block body %}
+<div class="fullbody_content">
     <div class="fullbody">
         <div class="navbar">{% include 'navbar.html' %}</div>
         <div class="content">
@@ -38,6 +39,7 @@
             </div>
             <div class="added_admins">
                 <div class="current_tab">Added Admins</div>
+                <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
@@ -56,14 +58,21 @@
                                     <td>{{ user.email }}</td>
                                     <td>{{ user.phone }}</td>
                                     <td>{{ user.is_Caterer }}</td>
-                                    <td><div class="flex_button"><a href="" id="delete">Delete</a> <a href="" id="edit">Edit</a></div></td>
+                                    <td><div class="flex_button"><a href="{% url 'delete' user.id %}" id="delete">Delete</a> <a href="{% url 'edituser' user.id %}" id="edit">Edit</a></div></td>
                                 </tr>
                             {% endfor %}
                         {% endif %}
                     </tbody>
                 </table>
             </div>
+            </div>
         </div>
     </div>
     <div class="footer">{% include 'footer.html' %}</div>
+</div>
+    <!-- <style>
+        table{
+            min-height: 222px;
+        }
+    </style> -->
 {% endblock %}
