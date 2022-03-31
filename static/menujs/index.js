@@ -26,3 +26,15 @@
 
 //   console.log('page loaded');
 // })
+
+$(()=>{
+
+
+$('#menudate').on('change',(event)=>{
+  console.log('date changed');
+  console.log($('#menudate').val());
+  $('#menudatepicker').submit()
+});
+
+
+});

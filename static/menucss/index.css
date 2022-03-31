@@ -23,7 +23,7 @@ form,.green{
   color: #868E27;
 }
 
-#greensubmit,#makeavailable,#greenbtn{
+#greensubmit,#makeavailable,#greenbtn,.green-label{
 
   background-color:#868E27;
   color: white;
@@ -43,3 +43,4 @@ form,.green{
   align-items: flex-start;
   justify-content: flex-start;
 }
+

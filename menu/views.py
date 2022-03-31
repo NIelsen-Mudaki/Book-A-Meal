@@ -1,13 +1,23 @@
 from django.shortcuts import redirect, render
 from .forms import MenuForm
-from .models import Menu
+from .models import Menu,MenuDate
 from django.http import JsonResponse
+import datetime
 # Create your views here.
 
 def menu(request):
   
   active_menu_items=Menu.get_active_menu_items()
   inactive_menu_items=Menu.get_inactive_menu_items()
+
+  if request.method=='POST' and 'menudate' in request.POST:
+    menudate=request.POST.get('menudate')
+    menudateobj=datetime.datetime.strptime(menudate,'%Y-%m-%d')
+    selected_date=menudateobj.date()
+    new_menu_date=MenuDate(menu_date=selected_date)
+    new_menu_date.save()
+
+    print('we ran')
 
   form=MenuForm()
   context={

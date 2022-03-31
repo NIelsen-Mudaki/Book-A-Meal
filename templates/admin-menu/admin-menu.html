@@ -25,7 +25,17 @@
   <input type="submit" value="Add">
   </form> -->
   <h2 class="p-3 green">Manage Menu</h2>
-  <h5 class="green p-3">New Menu Item</h5>
+  <div class="d-flex justify-content-between">
+    
+    <h5 class="green p-3">New Menu Item</h5>
+    <div class="green p-3">
+    <form action="{% url 'menu' %}" class="green" id="menudatepicker" method="POST">
+      {% csrf_token %}
+      <label for="menu-date">Menu For</label>
+      <input type="date" class="green" id="menudate" name="menudate" value="2022-03-31">
+    </form>
+  </div>
+  </div>
   <form action="{% url 'createmenu' %}" class="" id="menuform" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row p-3">
