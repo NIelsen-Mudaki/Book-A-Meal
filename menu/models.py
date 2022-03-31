@@ -1,20 +1,43 @@
+from datetime import datetime, timedelta
 from django.db import models
 from cloudinary.models import CloudinaryField
-
+from django.utils import timezone
 # Create your models here.
+
+class MenuDate(models.Model):
+    menu_date=models.DateField()
+    class Meta:
+        db_table='MenuDate'
+
+    def get_menus_per_date(self):
+        return self.menus.all()
+
 class Menu(models.Model):
     meal = models.CharField(max_length=255)
     price = models.FloatField()
     description = models.CharField(max_length=255)
     status = models.BooleanField(default=True)
     image = CloudinaryField('image')
+    # menu_date=models.ForeignKey(MenuDate,related_name='menu',on_delete=models.CASCADE)
+    menu_date=models.ManyToManyField(MenuDate,related_name='menus',blank=True)
+    created=models.DateTimeField(auto_now=True,blank=True)
 
     class Meta:
         db_table = 'Menu'
 
     def __str__(self):
         return self.meal
-    
+
+
+    def add_menu_to_date(self,menu_date):
+        self.menu_date.add(menu_date)
+        return 
+
+    def remove_menu_from_date(self,menu_date):
+        self.menu_date.delete(menu_date)
+        print('removed')
+        return
+
     @classmethod
     def get_active_menu_items(cls):
         return cls.objects.filter(status=True).all()
