@@ -1,8 +1,8 @@
-.card{
+/* .menu-form-card{
 width:50rem;
 margin:auto;
 
-}
+} */
 
 form .form-control{
   margin-bottom: 2rem;
@@ -23,9 +23,23 @@ form,.green{
   color: #868E27;
 }
 
-.submit-menu{
+#greensubmit,#makeavailable,#greenbtn{
 
   background-color:#868E27;
   color: white;
 
+}
+
+/* .menu-item{
+  min-width:20rem;
+} */
+
+.menu-image{
+
+  max-height: 15rem;
+}
+
+#navabarmenu{
+  align-items: flex-start;
+  justify-content: flex-start;
 }
