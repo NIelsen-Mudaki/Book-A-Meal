@@ -13,9 +13,9 @@ def menu(request):
   active_menu_items=Menu.get_active_menu_items()
   inactive_menu_items=Menu.get_inactive_menu_items()
   
-  try:
-    current_date_str=request.COOKIES.get('activedate')
-  except:
+
+  current_date_str=request.COOKIES.get('activedate')
+  if not current_date_str:
     current_datetime=datetime.datetime.today()
     current_date=current_datetime.date()
 
@@ -25,7 +25,7 @@ def menu(request):
       new_menu_date.save()
     current_date_str=current_date.strftime('%Y-%m-%d')
     response=redirect('menu')
-    response.set_cookie(key='activedate',value=menudate)
+    response.set_cookie(key='activedate',value=current_date_str)
     return response
 
   menudateobj=datetime.datetime.strptime(current_date_str,'%Y-%m-%d')
