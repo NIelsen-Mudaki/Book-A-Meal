@@ -38,6 +38,46 @@ def create_menu(request):
     return redirect('menu')
 
 
+def edit_menu(request,id):
+  if request.method=='POST':
+      target_menu=Menu.objects.filter(id=id).first()
+      if target_menu:
+        meal=request.POST.get('meal')
+        additional_items=request.POST.get('additional')
+        price=request.POST.get('price')
+        description=request.POST.get('description')
+        try:
+          image=request.FILES['mealimage']
+        except:
+          image=None
+        
+        
+        if image:
+          target_menu.edit_menu(meal=meal,price=price,description=description,image=image)
+        else:
+          target_menu.edit_menu(meal=meal,price=price,description=description)
+          
+        
+        
+        
+        
+        
+        # data={'success':'You have been successfully rated this project'}
+        # return JsonResponse(data)
+        return redirect('menu')
+      
+  
+  target_menu=Menu.objects.filter(id=id).first()
+
+  context={
+      "menu":target_menu
+    }
+  
+  if target_menu==None:
+    return redirect('menu')
+  return render(request,'admin-menu/edit-menu.html',context)
+
+
 def available(request,id):
   target_menu=Menu.objects.filter(id=id).first()
   target_menu.change_status()

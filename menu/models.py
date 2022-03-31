@@ -33,3 +33,12 @@ class Menu(models.Model):
     def delete_menu(self):
         self.delete()
         return f"{self} is deleted"
+
+    def edit_menu(self,**kwags):
+        for key, value in kwags.items():
+            setattr(self,key,value)
+
+        self.save()
+
+        return self
+
