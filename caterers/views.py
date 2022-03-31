@@ -3,6 +3,10 @@ from customer.models import Customer
 from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 def manageadmins_view(request):
+    try:
+        current_user = request.COOKIES['users']
+    except:
+        return redirect("/")
     errors = ''
     success = ''
     try:
@@ -34,6 +38,10 @@ def manageadmins_view(request):
 
 
 def editusers_view(request, id):
+    try:
+        current_user = request.COOKIES['users']
+    except:
+        return redirect("/")
     success = ''
     errors = ''
     users = Customer.objects.get(id = id)
@@ -49,6 +57,10 @@ def editusers_view(request, id):
     return response
 
 def updateuser_view(request):
+    try:
+        current_user = request.COOKIES['users']
+    except:
+        redirect("/")
     if request.method == 'POST':
         fullnames = request.POST['fullnames']
         emailadress = request.POST['emailadress']

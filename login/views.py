@@ -55,6 +55,10 @@ def delete_view(request, id):
 
 
 def logout_view(request):
+    try:
+        current_user = request.COOKIES['users']
+    except:
+        redirect("/")
     response = redirect("/")
     response.delete_cookie("users")
     return response
