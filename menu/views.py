@@ -34,7 +34,7 @@ def menu(request):
           new_menu_date.save()
       current_date_str = current_date.strftime('%Y-%m-%d')
       response = redirect('menu')
-      # response.set_cookie(key='activedate', value=current_date_str)
+      response.set_cookie(key='activedate', value=current_date_str)
       return response
 
   menudateobj = datetime.datetime.strptime(current_date_str, '%Y-%m-%d')
