@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth.hashers import make_password, check_password
 import datetime
+from rest_framework import status
 
 # Create your views here.
 
@@ -31,6 +32,19 @@ def get_menu(request):
     else:
         return Response({})
 
+
+@api_view(['POST'])
+def create_order(request):
+    serializers=OrdersSerializer(data=request.data)
+    customerid=request.data.get('customer_id')
+    target_customer=Customer.objects.filter(id=customerid).first()
+    menuid=request.data.get('menu_id')
+    target_menu=Menu.objects.filter(id=menuid).first()
+    if serializers.is_valid():
+        serializers.save(customer_id=target_customer,menu_id=target_menu)
+        return Response(serializers.data,status=status.HTTP_201_CREATED)
+
+    return serializers
 @api_view(['POST'])
 def signup(request):
     customer = request.data
