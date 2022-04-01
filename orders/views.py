@@ -6,7 +6,7 @@ import datetime as dt
 # Create your views here.
 def orders(request):
     customer = request.user.id
-    orders = Orders.get_orders_by_customer(customer)
+    orders = Orders.get_all_orders()
     
     print(orders)
     return render(request,'orders.html',{'orders' : orders})
