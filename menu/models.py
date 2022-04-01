@@ -20,7 +20,7 @@ class Menu(models.Model):
     image = CloudinaryField('image')
     # menu_date=models.ForeignKey(MenuDate,related_name='menu',on_delete=models.CASCADE)
     menu_date=models.ManyToManyField(MenuDate,related_name='menus',blank=True)
-    created=models.DateTimeField(auto_now=True,blank=True)
+    created=models.DateTimeField(auto_now=True,null=True)
 
     class Meta:
         db_table = 'Menu'

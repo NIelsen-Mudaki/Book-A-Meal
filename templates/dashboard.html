@@ -4,8 +4,27 @@
 {% block body %}
     <div class="fullbody">
         <div class="navbar">{% include 'navbar.html' %}</div>
-        <div class="content">Content</div>
-         
-    </div>
+        <div class="content">
+            <div class="current_tab">Dashboard /</div>
+            <div class="flex_dashdata">
+                <div class="flex_cards">
+                    <div class="card">Total Sales <br> 12,350/=</div>
+                    <div class="card">Total Order <br> 70</div>
+                    <div class="card">Admins <br> 4</div>
+                    <div class="card">Clients <br> 300</div>
+                </div>
+                <div class="callendar">
+                    <div id="element">
+                    <script>
+                        // initialize the Calendar component
+                        var calendar = new ej.calendars.Calendar();
+                
+                        // Render the initialized button.
+                        calendar.appendTo('#element')
+                    </script>
+                </div>
+            </div>
+        </div>
+        </div>
     <div class="footer">{% include 'footer.html' %}</div>
 {% endblock %}
