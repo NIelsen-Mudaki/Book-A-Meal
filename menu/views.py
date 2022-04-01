@@ -58,7 +58,7 @@ def menu(request):
       'inactivemenuitems': inactive_menu_items,
       'menudate': current_date_str,
   }
-  return render(request, 'test.html', context)
+  return render(request, 'admin-menu/admin-menu.html', context)
 
 
 def create_menu(request):

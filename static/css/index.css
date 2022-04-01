@@ -93,8 +93,14 @@ label{
 body{
     height: 100vh;
 }
+/*  */
 .fullbody{
     height: 92vh;
+}
+.content{
+    height: 87vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .flex_cards{
     display: flex;
@@ -125,9 +131,22 @@ body{
     width: 100%;
     text-align: center;
 }
-
-
-
+form #meal, form #additional,form #price, form #description{
+    border: 1px solid #868E27;
+}
+#content{
+    overflow-y: scroll;
+}
+.card_images{
+    width: 70px;
+    height: 70px;
+}
+#menudate{
+    border: 1px solid #868E27;
+    padding: 5px;
+    padding-left: 20px;
+    border-radius: 5px;
+}
 @media screen and (max-width: 700px){
     .nav_name{
         display: none;
