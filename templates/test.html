@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+{% block body %}
+    <div class="fullbody">
+        <div class="navbar">{% include 'navbar.html' %}</div>
+        <div class="content">
+            <div class="current_tab">Menu /</div>
+			<div class="card mt-1 menu-form-card border-0">
+				<div class="d-flex justify-content-between">
+				  <div class="current_tab">New Menu Item</div>
+				  <div class="green">
+				  <form action="{% url 'menu' %}" class="green" id="menudatepicker" method="POST">
+					{% csrf_token %}
+					<label for="menu-date">Menu For</label>
+					<input type="date" class="green" id="menudate" autocomplete="off" name="menudate" value="{{menudate}}">
+				  </form>
+				</div>
+				</div>
+				<form action="{% url 'createmenu' %}" class="" id="menuform" autocomplete="off" method="POST" enctype="multipart/form-data">
+				  {% csrf_token %}
+				  <div class="row p-3">
+					<div class="col-12 col-lg-6 form-group">
+					<label for="meal">Meal Items</label>
+					  <input type="text" name="meal" id="meal" autocomplete="off" class="form-control shadow-none" placeholder="Main items (rice & meat)">
+					</div>
+					<div class="col-12 col-lg-6 form-group">
+					<label for="additional">Additional Items</label>
+					  <input type="text" name="additional" autocomplete="off" id="additional" class="form-control shadow-none" placeholder="Additional Items">
+					</div>
+					<div class="col-6 form-group">
+					  <label for="price">Meal Price</label>
+					  <input type="text" name="price" id="price" autocomplete="off" class="form-control shadow-none" placeholder="Price in Ksh">
+					</div>
+					<div class="col-6 form-group">
+					<label for="description">Description</label>
+					  <input type="text" name="description" id="description" autocomplete="off" class="form-control shadow-none" placeholder="Meal description">
+					</div>
+					<div class="col-6 form-group">
+					<label for="mealimage">Meal Image</label>
+					  <div>
+					<input type="file" name="mealimage" class="green" id="mealimage" autocomplete="off" required>
+				  </div>
+				  </div>
+					<div class="col-12 form-group">
+					  <input type="submit" value="Add Menu" class="text-light btn" id="submitbtn">
+					</div>
+				  </div>
+				</form>
+			  </div>
+			  <div class="current_tab">Today's Menu</div>
+			{% if activemenuitems %}
+			<div class="row">
+			  {% for menu in activemenuitems %}
+			  <div class="col-6">
+				<div class="card d-flex p-3 mb-2 flex-row justify-content-between">
+					<div>
+					  <h3>{{menu.meal}}</h3>
+					  <p>{{menu.description}}</p>
+					  <p>Ksh. {{menu.price}}</p>
+					  <a class="btn btn-secondary" id="makeunavailable" name="makeunavailable" href="{% url 'make_unavailable' menu.id %}">Make Unavailable</a>
+					  <a class="btn btn-danger" href="{% url 'delete_menu' menu.id %}">Delete</a>
+					  <a class="btn text-light" id="submitbtn" href="{% url 'editmenu' menu.id %}">Edit</a>
+					 </div>
+					 <div>
+					<div class="card_images">
+						<img src="{{menu.image.url}}" height="100%" width="100%" class="menu-image img-fluid" alt="Now">
+					</div>
+					</div>
+				</div>
+			  </div>
+			  {% endfor %}
+			</div>
+			{% else %}
+			<p class="text-danger">Today's menu is empty</p>
+			{% endif %}
+			<hr>
+			<h3 class="mt-3">Meals Selection</h3>
+			{% if inactivemenuitems %}
+			<div class="row">
+			  {% for menu in inactivemenuitems %}
+			  <div class="col-6">
+				<div class="card d-flex p-3 mb-2 flex-row justify-content-between text-muted" id="menu_card">
+					<div>
+					  <h3>{{menu.meal}}</h3>
+					  <p>{{menu.description}}</p>
+					  <p>Ksh. {{menu.price}}</p>
+					  <a class="btn greensubmit text-light" id="submitbtn" href="{% url 'available' menu.id %}">Make Available</a>
+					  <a class="btn btn-danger" href="{% url 'delete_menu' menu.id %}">Delete</a>
+					 </div>
+					 <div>
+					<div class="card_images">
+					     <img src="{{menu.image.url}}" class="menu-image img-fluid" width="100%" height="100%" alt="Now">
+					</div>
+				</div>
+				</div>
+			  </div>
+			  {% endfor %}
+			</div>
+			{% else %}
+			<p>No meals to list</p>
+			{% endif %}
+			</div>
+	</div>
+</div>
+	{% load static %}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+		<script src="{% static 'menujs/index.js' %}" type="text/javascript"></script>
+    <div class="footer">{% include 'footer.html' %}</div>
+{% endblock %}

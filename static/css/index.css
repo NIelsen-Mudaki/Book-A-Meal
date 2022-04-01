@@ -93,8 +93,59 @@ label{
 body{
     height: 100vh;
 }
+/*  */
 .fullbody{
     height: 92vh;
+}
+.content{
+    height: 87vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.flex_cards{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 45%;
+    row-gap: 20px;
+}
+.flex_cards .card{
+    height: 100px;
+    width: 200px;
+    background-color: #868E27;
+    text-align: center;
+    font-weight: bold;
+    color: #FFFFFF;
+    padding-top: 15px;
+}
+.flex_dashdata{
+    display: flex;
+    justify-content: space-between;
+}
+.callendar{
+    width: 45%;
+}
+.calendar-header{
+    color: #868E27;
+    height: 40px;
+    width: 100%;
+    text-align: center;
+}
+form #meal, form #additional,form #price, form #description{
+    border: 1px solid #868E27;
+}
+#content{
+    overflow-y: scroll;
+}
+.card_images{
+    width: 70px;
+    height: 70px;
+}
+#menudate{
+    border: 1px solid #868E27;
+    padding: 5px;
+    padding-left: 20px;
+    border-radius: 5px;
 }
 @media screen and (max-width: 700px){
     .nav_name{
