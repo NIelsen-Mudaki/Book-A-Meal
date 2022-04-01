@@ -60,7 +60,6 @@ def menu(request):
   }
   return render(request, 'admin-menu/admin-menu.html', context)
 
-
 def create_menu(request):
     meal = request.POST.get('meal')
     print(meal)
