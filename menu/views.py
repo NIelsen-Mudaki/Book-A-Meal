@@ -56,7 +56,7 @@ def menu(request):
     'activemenuitems':active_menu_items,
     'inactivemenuitems':inactive_menu_items,
     'menudate':menudate
-
+    }
     current_date_str = request.COOKIES.get('activedate')
     if request.method == 'POST' and 'menudate' in request.POST:
         menudate = request.POST.get('menudate')
