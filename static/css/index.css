@@ -112,16 +112,22 @@ body{
     color: #FFFFFF;
     padding-top: 15px;
 }
-.callendar{
-    height: 45px;
-}
-.callendar{
-    width: 45%;
-}
 .flex_dashdata{
     display: flex;
     justify-content: space-between;
 }
+.callendar{
+    width: 45%;
+}
+.calendar-header{
+    color: #868E27;
+    height: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+
+
 @media screen and (max-width: 700px){
     .nav_name{
         display: none;
