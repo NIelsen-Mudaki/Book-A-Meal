@@ -11,7 +11,12 @@ def menu(request):
       current_user = request.COOKIES['users']
   except:
       return redirect("/")
-  
+  try:
+      getactivedate = request.COOKIES['activedate']
+  except:
+      response = redirect('/menu/')
+      response.set_cookie("activedate", datetime.datetime.today().date())
+      return response
   current_date_str = request.COOKIES.get('activedate')
   if request.method == 'POST' and 'menudate' in request.POST:
       menudate = request.POST.get('menudate')
@@ -54,7 +59,6 @@ def menu(request):
       'menudate': current_date_str,
   }
   return render(request, 'admin-menu/admin-menu.html', context)
-
 
 def create_menu(request):
     meal = request.POST.get('meal')

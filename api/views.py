@@ -6,6 +6,7 @@ from api.serializer import *
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.contrib.auth.hashers import make_password, check_password
 import datetime
 from rest_framework import status
 
@@ -44,3 +45,24 @@ def create_order(request):
         return Response(serializers.data,status=status.HTTP_201_CREATED)
 
     return serializers
+@api_view(['POST'])
+def signup(request):
+    customer = request.data
+    customer_name = customer['customername']
+    email = customer['useremail']
+    phone = customer['contact']
+    password = customer['password']
+    
+
+    user_exists = Customer.objects.filter(email=email)
+    if user_exists.exists():
+        return Response('User with this e-mail already exists!')
+    else:
+        hashed_password = make_password(password)
+        new_user = Customer(customer_name=customer_name,
+                            email=email,
+                            phone=phone,
+                            password=hashed_password)
+
+        new_user.save()
+        return Response('Account created successfully!')

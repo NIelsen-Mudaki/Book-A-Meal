@@ -19,7 +19,7 @@ class Menu(models.Model):
     status = models.BooleanField(default=True)
     image = CloudinaryField('image')
     menu_date=models.ManyToManyField(MenuDate,related_name='menus',blank=True)
-    created=models.DateTimeField(auto_now=True,blank=True)
+    created=models.DateTimeField(auto_now=True,null=True)
 
     class Meta:
         db_table = 'Menu'

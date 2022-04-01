@@ -1,0 +1,31 @@
+.callendar{
+    width: 45%;
+}
+#calendarheader{
+    background-color: #868E27;
+    color: #FFFFFF;
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    font-weight: bold;
+    padding-top: 10px;
+}
+.weeks{
+    color: #868E27;
+}
+.weeks .allbuttons,.days .allbuttons{
+    border: none;
+    background-color: #FFFFFF;
+    width: 14%;
+}
+.days,.weeks{
+    margin-top: 10px;
+}
+#latest_orders{
+    margin-top: 10px;
+}
+title{
+    color: #FFFFFF;
+    background-color: #868E27;
+}

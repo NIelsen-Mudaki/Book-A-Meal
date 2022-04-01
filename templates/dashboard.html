@@ -4,8 +4,49 @@
 {% block body %}
     <div class="fullbody">
         <div class="navbar">{% include 'navbar.html' %}</div>
-        <div class="content">Content</div>
-         
-    </div>
+        <div class="content">
+            <div class="current_tab">Dashboard /</div>
+            <div class="flex_dashdata">
+                <div class="flex_cards">
+                    <div class="card">Total Sales <br> 12,350/=</div>
+                    <div class="card">Total Order <br> {{orders}}</div>
+                    <div class="card">Admins <br> {{admins}}</div>
+                    <div class="card">Clients <br> {{clients}}</div>
+                </div>
+                <div class="callendar">
+                    <div class="calendar-header" id="calendarheader"></div>
+                    <div class="weeks" id="weeks"></div>
+                    <div class="days" id="days"></div>
+                </div>
+            </div>
+            <div class="current_tab" id="latest_orders">Latest Orders</div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Customer</th>
+                            <th>Order</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if items != 'noitem' %}
+                            {% for item in items %}
+                               <tr>
+                                   <td>{{ item.customer_id }}</td>
+                                   <td>{{ item.menu_id }}</td>
+                                   <td>{{ item.order_date }}</td>
+                                   <td>{{ item.order_status }}</td>
+                                   <td>{{ item.menu_id.price }}</td>
+                               </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
     <div class="footer">{% include 'footer.html' %}</div>
 {% endblock %}
