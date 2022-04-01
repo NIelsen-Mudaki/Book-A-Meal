@@ -1,3 +1,4 @@
+from ast import Or
 from django.shortcuts import render
 from customer.models import Customer
 from menu.models import Menu,MenuDate
@@ -31,6 +32,17 @@ def get_menu(request):
         return Response(serialize.data)
     else:
         return Response({})
+
+@api_view(['GET'])
+def get_customer_order(request, id):
+    current_customer = Customer.objects.filter(id=id).first()
+    orders = Orders.objects.filter(customer_id=current_customer)
+    if orders:
+        serialize = OrdersSerializer(orders, many=True)
+        return Response(serialize.data)
+    else:
+        return Response('No orders placed by this customer')
+
 
 
 @api_view(['POST'])
@@ -68,3 +80,19 @@ def signup(request):
 
         new_user.save()
         return Response('Account created successfully!')
+
+@api_view(['POST'])
+def reset_password(request):
+    user = request.data
+    email = user['useremail']
+    password = user['password']
+    hashed_password = make_password(password)
+
+    user_exists = Customer.objects.filter(email=email)
+    if user_exists.exists():
+        get_user = Customer.objects.get(email=email)
+        get_user.password = hashed_password
+        get_user.save()
+        return Response('Password has been reset successfully!!')
+    else:
+        return Response('There is no user with this e-mail')
