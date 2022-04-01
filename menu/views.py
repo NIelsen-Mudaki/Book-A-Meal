@@ -1,4 +1,3 @@
-from curses import window
 from django.shortcuts import redirect, render
 from .forms import MenuForm
 from .models import Menu, MenuDate
