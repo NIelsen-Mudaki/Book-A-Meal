@@ -1,0 +1,9 @@
+.callendar{
+    width: 45%;
+}
+.calendar-header{
+    color: #868E27;
+    height: 40px;
+    width: 100%;
+    text-align: center;
+}
