@@ -62,7 +62,9 @@ def signup(request):
         new_user = Customer(customer_name=customer_name,
                             email=email,
                             phone=phone,
-                            password=hashed_password)
+                            password=hashed_password,
+                            is_Customer=True,
+                            is_Caterer=False)
 
         new_user.save()
         return Response('Account created successfully!')
