@@ -7,5 +7,5 @@ from api.views import get_orders,get_menu,signup
 urlpatterns = [
     path('orders/',get_orders),
     path('menu/',get_menu),
-    path('signup/', signup)
+    path('signup', signup)
 ]
