@@ -18,7 +18,6 @@ class Menu(models.Model):
     description = models.CharField(max_length=255)
     status = models.BooleanField(default=True)
     image = CloudinaryField('image')
-    # menu_date=models.ForeignKey(MenuDate,related_name='menu',on_delete=models.CASCADE)
     menu_date=models.ManyToManyField(MenuDate,related_name='menus',blank=True)
     created=models.DateTimeField(auto_now=True,blank=True)
 
@@ -37,6 +36,10 @@ class Menu(models.Model):
         self.menu_date.delete(menu_date)
         print('removed')
         return
+
+    @classmethod
+    def get_menu_list_to_assign(cls,assigned_ids):
+        return Menu.objects.exclude(id__in=assigned_ids).all()
 
     @classmethod
     def get_active_menu_items(cls):
