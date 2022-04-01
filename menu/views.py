@@ -45,69 +45,6 @@ def menu(request):
       active_menu_ids = list(menu.id for menu in active_menu_items)
       inactive_menu_items = Menu.get_menu_list_to_assign(active_menu_ids)
   except:
-<<<<<<< HEAD
-    active_menu_items=[]
-    inactive_menu_items=[]
-
-  
-
-  if request.method=='POST' and 'menudate' in request.POST:
-    menudate=request.POST.get('menudate')
-    menudateobj=datetime.datetime.strptime(menudate,'%Y-%m-%d')
-    selected_date=menudateobj.date()
-    check_date=MenuDate.objects.filter(menu_date=selected_date).first()
-    if not check_date:
-      new_menu_date=MenuDate(menu_date=selected_date)
-      new_menu_date.save()
-
-    context={
-    'activemenuitems':active_menu_items,
-    'inactivemenuitems':inactive_menu_items,
-    'menudate':menudate
-    }
-    current_date_str = request.COOKIES.get('activedate')
-    if request.method == 'POST' and 'menudate' in request.POST:
-        menudate = request.POST.get('menudate')
-        menudateobj = datetime.datetime.strptime(menudate, '%Y-%m-%d')
-        selected_date = menudateobj.date()
-        check_date = MenuDate.objects.filter(menu_date=selected_date).first()
-        if not check_date:
-            new_menu_date = MenuDate(menu_date=selected_date)
-            new_menu_date.save()
-        response = redirect('menu')
-        return response
-    print(current_date_str)
-    if not current_date_str:
-        current_datetime = datetime.datetime.today()
-        current_date = current_datetime.date()
-
-        check_date = MenuDate.objects.filter(menu_date=current_date).first()
-        if not check_date:
-            new_menu_date = MenuDate(menu_date=current_date)
-            new_menu_date.save()
-        current_date_str = current_date.strftime('%Y-%m-%d')
-        response = redirect('menu')
-        response.set_cookie(key='activedate', value=current_date_str)
-        return response
-
-    menudateobj = datetime.datetime.strptime(current_date_str, '%Y-%m-%d')
-    active_date = menudateobj.date()
-    active_menu_date = MenuDate.objects.filter(menu_date=active_date).first()
-    try:
-        active_menu_items = active_menu_date.menus.all()
-        active_menu_ids = list(menu.id for menu in active_menu_items)
-        inactive_menu_items = Menu.get_menu_list_to_assign(active_menu_ids)
-    except:
-        active_menu_items = []
-        inactive_menu_items = []
-
-    context = {
-        'activemenuitems': active_menu_items,
-        'inactivemenuitems': inactive_menu_items,
-        'menudate': current_date_str,
-    }
-    return render(request, 'admin-menu/admin-menu.html', context)
-=======
       active_menu_items = []
       inactive_menu_items = []
 
@@ -117,8 +54,6 @@ def menu(request):
       'menudate': current_date_str,
   }
   return render(request, 'admin-menu/admin-menu.html', context)
->>>>>>> 885483645abc8b6ea80a70c6bcab203d398c6661
-
 
 def create_menu(request):
     meal = request.POST.get('meal')
