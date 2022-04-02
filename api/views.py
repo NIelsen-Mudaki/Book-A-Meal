@@ -96,3 +96,21 @@ def reset_password(request):
         return Response('Password has been reset successfully!!')
     else:
         return Response('There is no user with this e-mail')
+
+@api_view(['POST'])
+def login(request):
+    user = request.data
+    email = user['useremail']
+    password = user['password']
+   
+    get_user = Customer.objects.filter(email=email)
+    if get_user.exists():
+        get_user = Customer.objects.get(email=email)
+        passwords = get_user.password
+        checkpass = check_password(password, passwords)
+        if checkpass:
+            pass
+        else:
+            return Response('Wrong password, please try again')
+    else:
+        return Response('user with this email dont exist.')
