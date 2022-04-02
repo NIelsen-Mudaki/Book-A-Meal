@@ -115,7 +115,7 @@ def login(request):
                 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
                 'iat':datetime.datetime.utcnow()
             }
-            token = jwt.encode(userdet, 'secrete', algorithm = 'HS256').decode('utf-8')
+            token = jwt.encode(userdet, 'secret', algorithm = 'HS256').decode('utf-8')
             response = Response()
             response.set_cookie("jwt", token, httponly = True)
             response.data = {'jwt':token}
@@ -124,3 +124,18 @@ def login(request):
             return Response('Wrong password, please try again')
     else:
         return Response('user with this email dont exist.')
+
+
+@api_view(['GET'])
+def getuser(request):
+    token = request.COOKIES['jwt']
+    if token:
+        try:
+            userdet = jwt.decode(userdet, 'secret', algorithm = ['HS256'])
+        except:
+            return Response('unAuthenticated')
+        user = Customer.objects.get(userdet['id'])
+        serializer = CustomerSerializer(user)
+        return Response(serializer.data)
+    else:
+        return Response('unAuthenticated')
