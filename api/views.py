@@ -8,8 +8,9 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth.hashers import make_password, check_password
-import datetime
+import datetime, jwt
 from rest_framework import status
+
 
 # Create your views here.
 
@@ -109,7 +110,16 @@ def login(request):
         passwords = get_user.password
         checkpass = check_password(password, passwords)
         if checkpass:
-            return Response('login successfull' + " " + email)
+            userdet = {
+                'id':get_user.id,
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+                'iat':datetime.datetime.utcnow()
+            }
+            token = jwt.encode(userdet, 'secrete', algorithm = 'HS256').decode('utf-8')
+            response = Response()
+            response.set_cookie("jwt", token, httponly = True)
+            response.data = {'jwt':token}
+            return response
         else:
             return Response('Wrong password, please try again')
     else:
