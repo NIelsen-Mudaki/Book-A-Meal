@@ -15,7 +15,7 @@
 <div class="navbar" id="navbarmenu align-items-start">{% include 'navbar.html' %}</div>
 <div class="main content">
 <div class="container">  
-  <div class="card mt-1 menu-form-card border-0">
+  <div class="card mt-0 menu-form-card border-0">
   
   <h2 class="p-3 green">Manage Menu</h2>
   <div class="d-flex justify-content-between">
@@ -71,7 +71,7 @@
   </form>
 </div>
 
-<!--comment---></div>
+</div>
 
 <div class="container">
   <hr>
@@ -128,6 +128,8 @@
             <p>Ksh. {{menu.price}}</p>
             <a class="btn greensubmit" id="makeavailable" href="{% url 'available' menu.id %}">Make Available</a>
             <a class="btn btn-danger" href="{% url 'delete_menu' menu.id %}">Delete</a>
+            <a class="btn" id="greenbtn" href="{% url 'editmenu' menu.id %}">Edit</a>
+
 
            </div>
            <div>
@@ -147,7 +149,7 @@
   {% endif %}
 
   
-<!-----comment--></div>
+</div>
 
 </div>
 </div>

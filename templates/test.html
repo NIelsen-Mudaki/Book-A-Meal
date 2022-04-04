@@ -87,6 +87,8 @@
 					  <p>Ksh. {{menu.price}}</p>
 					  <a class="btn greensubmit text-light" id="submitbtn" href="{% url 'available' menu.id %}">Make Available</a>
 					  <a class="btn btn-danger" href="{% url 'delete_menu' menu.id %}">Delete</a>
+					  <a class="btn text-light" id="submitbtn" href="{% url 'editmenu' menu.id %}">Edit</a>
+
 					 </div>
 					 <div>
 					<div class="card_images">

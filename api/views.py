@@ -1,4 +1,5 @@
 from ast import Or
+from urllib import response
 from django.shortcuts import render
 from customer.models import Customer
 from menu.models import Menu,MenuDate
@@ -27,7 +28,11 @@ def get_orders(request):
 def get_menu(request):
     menu_date = datetime.datetime.today()
     current_menu_date = MenuDate.objects.filter(menu_date=menu_date).first()
-    menus = current_menu_date.menus.all()
+    try:
+        menus = current_menu_date.menus.all()
+
+    except:
+        return Response('No menu has been set for today')
     if menus:
         serialize = MenuSerializer(menus, many=True)
         return Response(serialize.data)
