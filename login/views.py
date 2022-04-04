@@ -13,7 +13,7 @@ def login_view(request):
             getuser = Customer.objects.get(email = useremail)
             passwords = check_password(password, getuser.password)
             if passwords:
-                response = redirect('/admins/')
+                response = redirect('/dashboard/')
                 response.set_cookie("users",useremail)
                 return response
             else:
@@ -48,8 +48,17 @@ def resetpass_view(request):
     }
     return render(request, "resetpass.html", context)
 
+def delete_view(request, id):
+    get_admin = Customer.objects.get(id =  id)
+    get_admin.delete()
+    return redirect("/manage-caterers/")
+
 
 def logout_view(request):
+    try:
+        current_user = request.COOKIES['users']
+    except:
+        redirect("/")
     response = redirect("/")
     response.delete_cookie("users")
     return response

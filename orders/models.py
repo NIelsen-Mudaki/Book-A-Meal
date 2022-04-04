@@ -17,6 +17,24 @@ class Orders(models.Model):
     def __str__(self):
         return self.order_status
 
+    @classmethod
+    def get_grand_total(cls):
+        orders = Orders.objects.all()
+        total = 0
+        for order in orders:
+            sub_total = order.quantity * order.menu_id.price
+
+            total+= sub_total
+        print(total)
+        return total
+        
+    @classmethod
+    def search_by_date(cls,search_term):
+        orders = cls.objects.filter(order_date__icontains=search_term)
+        return orders
+
+
+
     @staticmethod
     def get_orders_by_customer(customer_id):
         return Orders.objects.filter(customer_id=customer_id).order_by('order_date')
@@ -24,3 +42,6 @@ class Orders(models.Model):
     @staticmethod
     def get_all_orders():
         return Orders.objects.all().order_by('order_date')
+
+    
+
