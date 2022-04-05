@@ -154,7 +154,7 @@ def login(request):
             }
             token = jwt.encode(userdet, 'secret', algorithm = 'HS256').decode('utf-8')
             response = Response()
-            response.set_cookie("jwt", token, httponly = True)
+            response.set_cookie(key="jwt", value=token, httponly = True)
             response.data = {'jwt':token}
             return response
         else:
@@ -163,14 +163,16 @@ def login(request):
         return Response('user with this email dont exist.')
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def getuser(request):
-    token = request.COOKIES['jwt']
+    datas = request.data
+    # token = request.COOKIES.get('jwt')
+    token = datas['jwt']
     if token:
         try:
             userdet = jwt.decode(token, 'secret', algorithm = ['HS256'])
-        except jwt.ExpiredSignatureError:
-            return Response('unAuthenticated')
+        except:
+            return Response('Token modified, user unauthenticated')
         user = Customer.objects.get(id = userdet['id'])
         serializer = CustomerSerializer(user)
         return Response(serializer.data)
@@ -189,3 +191,19 @@ def signupnewslater(request):
         new_email = NewsLetter(email = email)
         new_email.save()
         return Response('signup successfull.')
+
+
+@api_view(['GET'])
+def get_fiewmenu(request):
+    menu_date = datetime.datetime.today()
+    current_menu_date = MenuDate.objects.filter(menu_date=menu_date).first()
+    try:
+        menus = current_menu_date.menus.all().order_by('-id')[:8]
+
+    except:
+        return Response('No menu has been set for today')
+    if menus:
+        serialize = MenuSerializer(menus, many=True)
+        return Response(serialize.data)
+    else:
+        return Response({})
