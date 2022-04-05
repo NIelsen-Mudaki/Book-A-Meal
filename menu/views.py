@@ -75,7 +75,10 @@ def create_menu(request):
         image = request.FILES['mealimage']
         parent_menu_date = MenuDate.objects.filter(
             menu_date=target_date_object.date()).first()
-
+        if parent_menu_date==None:
+            new_menu_date=MenuDate(menu_date=target_date_object.date())
+            new_menu_date.save()
+            parent_menu_date = MenuDate.objects.filter(menu_date=target_date_object.date()).first()
         print(description)
 
         new_menu = Menu(meal=meal, price=price,
