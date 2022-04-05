@@ -136,11 +136,24 @@ def getuser(request):
     token = request.COOKIES['jwt']
     if token:
         try:
-            userdet = jwt.decode(userdet, 'secret', algorithm = ['HS256'])
-        except:
+            userdet = jwt.decode(token, 'secret', algorithm = ['HS256'])
+        except jwt.ExpiredSignatureError:
             return Response('unAuthenticated')
-        user = Customer.objects.get(userdet['id'])
+        user = Customer.objects.get(id = userdet['id'])
         serializer = CustomerSerializer(user)
         return Response(serializer.data)
     else:
         return Response('unAuthenticated')
+
+
+@api_view(['POST'])
+def signupnewslater(request):
+    emailadress = request.data
+    email = emailadress['newslater']
+    getuser = newslater.objects.filter(email = email)
+    if getuser.exists():
+        return Response('Thanks.this email is alreay signed up')
+    else:
+        new_email = newslater(email = email)
+        new_email.save()
+        return Response('signup successfull.')

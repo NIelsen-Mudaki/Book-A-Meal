@@ -61,7 +61,8 @@ INSTALLED_APPS = [
     'sales',
     'django_bootstrap5',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'api'
 ]
 
 MIDDLEWARE = [
