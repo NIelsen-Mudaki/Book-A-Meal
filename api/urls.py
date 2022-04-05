@@ -13,5 +13,5 @@ urlpatterns = [
     path('orders/create/',create_order),
     re_path('customer/(.*)/orders/',get_customer_order),
     path('reset/password',reset_password),
-    path('newsletter',signupnewslater)
+    path('newsletter/',signupnewslater)
 ]

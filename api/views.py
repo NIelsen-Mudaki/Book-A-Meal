@@ -150,10 +150,10 @@ def getuser(request):
 def signupnewslater(request):
     emailadress = request.data
     email = emailadress['newslater']
-    getuser = newslater.objects.filter(email = email)
+    getuser = NewsLetter.objects.filter(email = email)
     if getuser.exists():
         return Response('Thanks.this email is alreay signed up')
     else:
-        new_email = newslater(email = email)
+        new_email = NewsLetter(email = email)
         new_email.save()
         return Response('signup successfull.')
