@@ -3,7 +3,7 @@ from urllib import response
 from django.shortcuts import render
 from customer.models import Customer
 from menu.models import Menu,MenuDate
-from orders.models import Orders
+from orders.models import OrderItem, Orders,Order
 from api.serializer import *
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
@@ -11,6 +11,7 @@ from rest_framework.decorators import api_view
 from django.contrib.auth.hashers import make_password, check_password
 import datetime, jwt
 from rest_framework import status
+import secrets
 
 
 # Create your views here.
@@ -23,6 +24,16 @@ def get_orders(request):
         return Response(serialize.data)
     else:
         return Response({})
+
+@api_view(['GET'])
+def get_multi_item_orders(request):
+    orders = Order.objects.all()
+    if orders:
+        serialize = MultiOrderSerializer(orders,many=True)
+        return Response(serialize.data)
+    else:
+        return Response({})
+
 
 @api_view(['GET'])
 def get_menu(request):
@@ -63,6 +74,27 @@ def create_order(request):
         return Response(serializers.data,status=status.HTTP_201_CREATED)
 
     return serializers
+
+
+@api_view(['POST'])
+def create_multi_item_order(request):
+    order_ref=secrets.token_hex(5)
+    customer_id=request.data.get('customer_id')
+    order_total_price=request.data.get('order_total_price')
+    order_customer=Customer.objects.filter(id=customer_id).first()
+    new_order=Order(customer_id=order_customer,order_total_price=order_total_price,order_ref=order_ref)
+    new_order.save()
+
+    parent_order=Order.objects.filter(order_ref=order_ref).first()
+
+    order_items=request.data.get('order-items')
+    for order_item in order_items:
+        target_menu=Menu.objects.filter(id=order_item['id']).first()
+        new_order_item=OrderItem(order=parent_order,menu_id=target_menu,quantity=order_item['qty'])
+        new_order_item.save()
+    
+    return Response('Order created successfully')
+
 @api_view(['POST'])
 def signup(request):
     customer = request.data
