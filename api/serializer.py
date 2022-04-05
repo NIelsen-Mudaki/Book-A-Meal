@@ -2,6 +2,7 @@ from rest_framework import serializers
 from customer.models import Customer
 from menu.models import Menu
 from orders.models import Orders
+from api.models import NewsLetter
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,3 +23,7 @@ class OrdersSerializer(serializers.ModelSerializer):
         depth=1
 
 
+class NewsLetterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewsLetter
+        fields = ['email']

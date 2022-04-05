@@ -9,8 +9,9 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth.hashers import make_password, check_password
-import datetime
+import datetime, jwt
 from rest_framework import status
+
 
 # Create your views here.
 
@@ -101,3 +102,58 @@ def reset_password(request):
         return Response('Password has been reset successfully!!')
     else:
         return Response('There is no user with this e-mail')
+
+@api_view(['POST'])
+def login(request):
+    user = request.data
+    email = user['useremail']
+    password = user['password']
+   
+    get_user = Customer.objects.filter(email=email)
+    if get_user.exists():
+        get_user = Customer.objects.get(email=email)
+        passwords = get_user.password
+        checkpass = check_password(password, passwords)
+        if checkpass:
+            userdet = {
+                'id':get_user.id,
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+                'iat':datetime.datetime.utcnow()
+            }
+            token = jwt.encode(userdet, 'secret', algorithm = 'HS256').decode('utf-8')
+            response = Response()
+            response.set_cookie("jwt", token, httponly = True)
+            response.data = {'jwt':token}
+            return response
+        else:
+            return Response('Wrong password, please try again')
+    else:
+        return Response('user with this email dont exist.')
+
+
+@api_view(['GET'])
+def getuser(request):
+    token = request.COOKIES['jwt']
+    if token:
+        try:
+            userdet = jwt.decode(token, 'secret', algorithm = ['HS256'])
+        except jwt.ExpiredSignatureError:
+            return Response('unAuthenticated')
+        user = Customer.objects.get(id = userdet['id'])
+        serializer = CustomerSerializer(user)
+        return Response(serializer.data)
+    else:
+        return Response('unAuthenticated')
+
+
+@api_view(['POST'])
+def signupnewslater(request):
+    emailadress = request.data
+    email = emailadress['newslater']
+    getuser = NewsLetter.objects.filter(email = email)
+    if getuser.exists():
+        return Response('Thanks.this email is alreay signed up')
+    else:
+        new_email = NewsLetter(email = email)
+        new_email.save()
+        return Response('signup successfull.')
