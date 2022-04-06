@@ -34,6 +34,20 @@ def get_multi_item_orders(request):
     else:
         return Response({})
 
+@api_view(['GET'])
+def get_user_orders(request,id):
+    try:
+        target_customer=Customer.objects.get(pk=id)
+    except:
+        return Response('User does not exist')
+
+    
+    orders = Order.objects.filter(customer_id=target_customer).all()
+    if orders:
+        serialize = MultiOrderSerializer(orders,many=True)
+        return Response(serialize.data)
+    else:
+        return Response({})
 
 @api_view(['GET'])
 def get_menu(request):
