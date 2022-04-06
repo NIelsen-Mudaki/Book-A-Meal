@@ -44,4 +44,23 @@ class Orders(models.Model):
         return Orders.objects.all().order_by('order_date')
 
     
+class Order(models.Model):
+    order_ref=models.CharField(max_length=50,default='AA',unique=True)
+    order_date = models.DateTimeField(auto_now_add=True)
+    customer_id = models.ForeignKey(Customer, related_name='order',on_delete=models.CASCADE)
+    order_status = models.CharField(max_length=255,default='pending')
+    order_total_price=models.FloatField()
 
+    class Meta:
+        db_table='order'
+
+    def __str__(self):
+        return self.order_status
+
+class OrderItem(models.Model):
+    order=models.ForeignKey(Order,related_name='orderitem',on_delete=models.CASCADE)
+    menu_id = models.ForeignKey(Menu,related_name="order_item", on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    class Meta:
+        db_table='orderitem'
