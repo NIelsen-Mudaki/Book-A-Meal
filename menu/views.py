@@ -11,13 +11,14 @@ def menu(request):
       current_user = request.COOKIES['users']
   except:
       return redirect("/")
-  try:
-      getactivedate = request.COOKIES['activedate']
-  except:
-      response = redirect('/menu/')
-      response.set_cookie("activedate", datetime.datetime.today().date())
-      return response
+#   try:
+#       getactivedate = request.COOKIES['activedate']
+#   except:
+#       response = redirect('/menu/')
+#       response.set_cookie("activedate", datetime.datetime.today().date())
+#       return response
   current_date_str = request.COOKIES.get('activedate')
+  print(f"Your current day is {current_date_str}")
   if request.method == 'POST' and 'menudate' in request.POST:
       menudate = request.POST.get('menudate')
       menudateobj = datetime.datetime.strptime(menudate, '%Y-%m-%d')
@@ -61,10 +62,12 @@ def menu(request):
   return render(request, 'admin-menu/admin-menu.html', context)
 
 def create_menu(request):
-    meal = request.POST.get('meal')
-    print(meal)
-    target_date = request.COOKIES.get('activedate')
-    target_date_object = datetime.datetime.strptime(target_date, '%Y-%m-%d')
+    try:
+        target_date = request.COOKIES.get('activedate')
+        target_date_object = datetime.datetime.strptime(target_date, '%Y-%m-%d')
+
+    except:
+        target_date_object=datetime.datetime.today()
 
     print(target_date_object)
     if request.method == 'POST':
@@ -75,7 +78,10 @@ def create_menu(request):
         image = request.FILES['mealimage']
         parent_menu_date = MenuDate.objects.filter(
             menu_date=target_date_object.date()).first()
-
+        if parent_menu_date==None:
+            new_menu_date=MenuDate(menu_date=target_date_object.date())
+            new_menu_date.save()
+            parent_menu_date = MenuDate.objects.filter(menu_date=target_date_object.date()).first()
         print(description)
 
         new_menu = Menu(meal=meal, price=price,

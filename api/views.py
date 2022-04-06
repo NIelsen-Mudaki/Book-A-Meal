@@ -3,14 +3,16 @@ from urllib import response
 from django.shortcuts import render
 from customer.models import Customer
 from menu.models import Menu,MenuDate
-from orders.models import Orders
+from orders.models import OrderItem, Orders,Order
 from api.serializer import *
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth.hashers import make_password, check_password
-import datetime
+import datetime, jwt
 from rest_framework import status
+import secrets
+
 
 # Create your views here.
 
@@ -22,6 +24,16 @@ def get_orders(request):
         return Response(serialize.data)
     else:
         return Response({})
+
+@api_view(['GET'])
+def get_multi_item_orders(request):
+    orders = Order.objects.all()
+    if orders:
+        serialize = MultiOrderSerializer(orders,many=True)
+        return Response(serialize.data)
+    else:
+        return Response({})
+
 
 @api_view(['GET'])
 def get_menu(request):
@@ -62,6 +74,27 @@ def create_order(request):
         return Response(serializers.data,status=status.HTTP_201_CREATED)
 
     return serializers
+
+
+@api_view(['POST'])
+def create_multi_item_order(request):
+    order_ref=secrets.token_hex(5)
+    customer_id=request.data.get('customer_id')
+    order_total_price=request.data.get('order_total_price')
+    order_customer=Customer.objects.filter(id=customer_id).first()
+    new_order=Order(customer_id=order_customer,order_total_price=order_total_price,order_ref=order_ref)
+    new_order.save()
+
+    parent_order=Order.objects.filter(order_ref=order_ref).first()
+
+    order_items=request.data.get('order-items')
+    for order_item in order_items:
+        target_menu=Menu.objects.filter(id=order_item['id']).first()
+        new_order_item=OrderItem(order=parent_order,menu_id=target_menu,quantity=order_item['qty'])
+        new_order_item.save()
+    
+    return Response('Order created successfully')
+
 @api_view(['POST'])
 def signup(request):
     customer = request.data
@@ -101,3 +134,76 @@ def reset_password(request):
         return Response('Password has been reset successfully!!')
     else:
         return Response('There is no user with this e-mail')
+
+@api_view(['POST'])
+def login(request):
+    user = request.data
+    email = user['useremail']
+    password = user['password']
+   
+    get_user = Customer.objects.filter(email=email)
+    if get_user.exists():
+        get_user = Customer.objects.get(email=email)
+        passwords = get_user.password
+        checkpass = check_password(password, passwords)
+        if checkpass:
+            userdet = {
+                'id':get_user.id,
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+                'iat':datetime.datetime.utcnow()
+            }
+            token = jwt.encode(userdet, 'secret', algorithm = 'HS256').decode('utf-8')
+            response = Response()
+            response.set_cookie(key="jwt", value=token, httponly = True)
+            response.data = {'jwt':token}
+            return response
+        else:
+            return Response('Wrong password, please try again')
+    else:
+        return Response('user with this email dont exist.')
+
+
+@api_view(['POST'])
+def getuser(request):
+    datas = request.data
+    # token = request.COOKIES.get('jwt')
+    token = datas['jwt']
+    if token:
+        try:
+            userdet = jwt.decode(token, 'secret', algorithm = ['HS256'])
+        except:
+            return Response('Token modified, user unauthenticated')
+        user = Customer.objects.get(id = userdet['id'])
+        serializer = CustomerSerializer(user)
+        return Response(serializer.data)
+    else:
+        return Response('unAuthenticated')
+
+
+@api_view(['POST'])
+def signupnewslater(request):
+    emailadress = request.data
+    email = emailadress['newslater']
+    getuser = NewsLetter.objects.filter(email = email)
+    if getuser.exists():
+        return Response('Thanks.this email is alreay signed up')
+    else:
+        new_email = NewsLetter(email = email)
+        new_email.save()
+        return Response('signup successfull.')
+
+
+@api_view(['GET'])
+def get_fiewmenu(request):
+    menu_date = datetime.datetime.today()
+    current_menu_date = MenuDate.objects.filter(menu_date=menu_date).first()
+    try:
+        menus = current_menu_date.menus.all().order_by('-id')[:8]
+
+    except:
+        return Response('No menu has been set for today')
+    if menus:
+        serialize = MenuSerializer(menus, many=True)
+        return Response(serialize.data)
+    else:
+        return Response({})
