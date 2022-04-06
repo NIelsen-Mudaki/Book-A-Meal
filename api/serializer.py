@@ -36,8 +36,9 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class MultiOrderSerializer(serializers.ModelSerializer):
     orderitem=OrderItemSerializer(many=True)
+    customer=serializers.CharField(source='customer_id.id',read_only=True)
     class Meta:
         model=Order
-        fields=['id','order_ref','order_date','order_status','order_total_price','orderitem']
+        fields=['id','order_ref','customer','order_date','order_status','order_total_price','orderitem']
         depth=1
 
