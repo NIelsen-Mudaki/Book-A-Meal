@@ -7,7 +7,7 @@ from api.models import NewsLetter
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ['customer_name', 'email', 'phone', 'is_Customer']
+        fields = ['id','customer_name', 'email', 'phone', 'is_Customer']
         depth=1
 
 class MenuSerializer(serializers.ModelSerializer):
