@@ -9,7 +9,10 @@ def orders(request):
     orders = Orders.get_all_orders()
 
     order_items=OrderItem.objects.all()
-    print('You have the following order items')
+    all_orders = []
+    for items in order_items:
+        totals = int(items.quantity) * int(items.menu_id.price)
+        all_orders.append({"id":items.id,"totals":totals})
     for item in order_items:
 
         # item['subtotal']=int(item.quantity * item.menu_id.price)
@@ -18,7 +21,8 @@ def orders(request):
     print(orders)
     context={
         'orders' : orders,
-        'orderitems':order_items
+        'orderitems':order_items,
+        'totals':all_orders
     }
     return render(request,'orders.html',context)
 
