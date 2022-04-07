@@ -84,7 +84,7 @@
             <div class="col-12">
               <input
                 type="submit"
-                value="Add Menu"
+                value="Edit Menu"
                 class="btn m-3 submit-menu mx-0"
                 id="greensubmit"
               />
@@ -101,7 +101,7 @@
           <p>{{menu.description}}</p>
           <p>Ksh. {{menu.price}}</p>
           <a class="btn btn-secondary" href="{% url 'available' menu.id %}">Make Unavailable</a>
-          <a class="btn btn-danger" href="{% url 'delete_menu' menu.id %}">Delete</a>
+          <!-- <a class="btn btn-danger" href="{% url 'delete_menu' menu.id %}">Delete</a> -->
           
 
          </div>
