@@ -11,14 +11,8 @@ def menu(request):
       current_user = request.COOKIES['users']
   except:
       return redirect("/")
-#   try:
-#       getactivedate = request.COOKIES['activedate']
-#   except:
-#       response = redirect('/menu/')
-#       response.set_cookie("activedate", datetime.datetime.today().date())
-#       return response
+
   current_date_str = request.COOKIES.get('activedate')
-  print(f"Your current day is {current_date_str}")
   if request.method == 'POST' and 'menudate' in request.POST:
       menudate = request.POST.get('menudate')
       menudateobj = datetime.datetime.strptime(menudate, '%Y-%m-%d')
@@ -29,7 +23,6 @@ def menu(request):
           new_menu_date.save()
       response = redirect('menu')
       return response
-  print(current_date_str)
   if not current_date_str:
       current_datetime = datetime.datetime.today()
       current_date = current_datetime.date()
@@ -39,9 +32,6 @@ def menu(request):
           new_menu_date = MenuDate(menu_date=current_date)
           new_menu_date.save()
       current_date_str = current_date.strftime('%Y-%m-%d')
-      # response = redirect('menu')
-      # response.set_cookie(key='activedate', value=current_date_str)
-      # return response
 
   menudateobj = datetime.datetime.strptime(current_date_str, '%Y-%m-%d')
   active_date = menudateobj.date()
