@@ -21,51 +21,18 @@
                 
                 <tbody>
             
-                    {% for order in orders %}
-                    <tr>
-                        <td>{{order.id}}</td>
-                        <td>{{order.menu_id.meal}}</td>
-                        <td>{{order.menu_id.price|currency}}</td>
-                        <td>{{order.quantity}}</td>
-                        <td>{{order.order_date}}</td>
-                        <td>{{order.quantity|product:order.menu_id.price|currency}}</td>
-                        
-                        {% if order.order_status == 'pending' %}
-                        <td><small class="btn bg-info shadow-none text-light">Pending</small></td>
-                        {%else%}
-                        <td><small class="btn btn-success">Fulfilled</small></td>
-                        {% endif %}
-                    </tr>
-
-                    {% endfor %}
-                    
-                </tbody>
-            </table>
-        
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Item ID</th>
-                        <th>Meal Option</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Date</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                
-                <tbody>
-            
                     {% for order in orderitems %}
                     <tr>
                         <td>{{order.id}}</td>
                         <td>{{order.menu_id.meal}}</td>
                         <td>{{order.menu_id.price}}</td>
                         <td>{{order.quantity}}</td>
-                        <td>{{order.order.customer_id.customer_name}}</td>
-                        <td>{{order.subtotal}}</td>
+                        <td>{{ order.order.order_date }}</td>
+                        {% for total in totals %}
+                          {% if total.id == order.id %}
+                             <td>{{total.totals}}</td>
+                          {% endif %}
+                        {% endfor %}
                         
                         {% if order.order.order_status == 'pending' %}
                         <td><small class="btn bg-info shadow-none text-light">Pending</small></td>

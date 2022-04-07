@@ -129,6 +129,7 @@ def available(request, id):
     print('available')
     target_menu = Menu.objects.filter(id=id).first()
     target_date = request.COOKIES.get('activedate')
+    # target_date = request.COOKIES['activedate']
     target_date_object = datetime.datetime.strptime(target_date, '%Y-%m-%d')
     target_menu_date = MenuDate.objects.filter(
         menu_date=target_date_object.date()).first()
