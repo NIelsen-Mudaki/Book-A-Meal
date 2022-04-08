@@ -23,7 +23,7 @@ form,.green{
   color: #868E27;
 }
 
-#greensubmit,#makeavailable,#greenbtn,.green-label{
+#greensubmit,#makeavailable,#greenbtn,.green-label,.greenbtn{
 
   background-color:#868E27;
   color: white;
@@ -35,7 +35,9 @@ form,.green{
 } */
 
 .menu-image{
-  max-height: 15rem;
+    height: 14rem;
+    width:16rem;
+
 }
 
 #navabarmenu{
@@ -43,3 +45,14 @@ form,.green{
   justify-content: flex-start;
 }
 
+@media only screen and (max-width:480px){
+
+
+}
+
+@media only screen and (max-width:768px){
+
+  .meal_card{
+    flex-direction: row!important;
+  }
+}
