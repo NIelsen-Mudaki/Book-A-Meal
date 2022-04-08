@@ -8,7 +8,7 @@
             <div class="current_tab">Dashboard /</div>
             <div class="flex_dashdata">
                 <div class="flex_cards">
-                    <div class="card">Total Sales <br> 12,350/=</div>
+                    <div class="card">Total Sales <br> {{ sales }}/=</div>
                     <div class="card">Total Order <br> {{orders}}</div>
                     <div class="card">Admins <br> {{admins}}</div>
                     <div class="card">Clients <br> {{clients}}</div>
@@ -24,25 +24,40 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Customer</th>
-                            <th>Order</th>
-                            <th>Time</th>
-                            <th>Status</th>
+                            <th>Item ID</th>
+                            <th>Meal Option</th>
                             <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
+                    
                     <tbody>
-                        {% if items != 'noitem' %}
-                            {% for item in items %}
-                               <tr>
-                                   <td>{{ item.customer_id }}</td>
-                                   <td>{{ item.menu_id }}</td>
-                                   <td>{{ item.order_date }}</td>
-                                   <td>{{ item.order_status }}</td>
-                                   <td>{{ item.menu_id.price }}</td>
-                               </tr>
+                
+                        {% for order in orderitems %}
+                        <tr>
+                            <td>{{order.id}}</td>
+                            <td>{{order.menu_id.meal}}</td>
+                            <td>{{order.menu_id.price}}</td>
+                            <td>{{order.quantity}}</td>
+                            <td>{{ order.order.order_date }}</td>
+                            {% for total in totals %}
+                              {% if total.id == order.id %}
+                                 <td>{{total.totals}}</td>
+                              {% endif %}
                             {% endfor %}
-                        {% endif %}
+                            
+                            {% if order.order.order_status == 'pending' %}
+                            <td><small class="btn bg-info shadow-none text-light">Pending</small></td>
+                            {%else%}
+                            <td><small class="btn btn-success">Fulfilled</small></td>
+                            {% endif %}
+                        </tr>
+    
+                        {% endfor %}
+                        
                     </tbody>
                 </table>
             </div>

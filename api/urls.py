@@ -2,13 +2,14 @@ from webbrowser import get
 from django import views
 from django.urls import path, re_path
 
-from api.views import create_multi_item_order, get_multi_item_orders, get_orders,get_menu,signup,create_order,get_customer_order,reset_password,login,getuser,signupnewslater,get_fiewmenu
+from api.views import create_multi_item_order, get_multi_item_orders, get_orders,get_menu,signup,create_order,get_customer_order,reset_password,login,getuser,signupnewslater,get_fiewmenu,get_user_orders
 
 
 #urls
 urlpatterns = [
     path('orders/',get_orders),
     path('ordersmulti/',get_multi_item_orders),
+    re_path('user/(.*)/orders/',get_user_orders),
     path('menu/',get_menu),
     path('signup', signup),
     path('login', login),

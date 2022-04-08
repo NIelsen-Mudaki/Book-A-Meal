@@ -21,16 +21,20 @@
                 
                 <tbody>
             
-                    {% for order in orders %}
+                    {% for order in orderitems %}
                     <tr>
                         <td>{{order.id}}</td>
                         <td>{{order.menu_id.meal}}</td>
-                        <td>{{order.menu_id.price|currency}}</td>
+                        <td>{{order.menu_id.price}}</td>
                         <td>{{order.quantity}}</td>
-                        <td>{{order.order_date}}</td>
-                        <td>{{order.quantity|product:order.menu_id.price|currency}}</td>
+                        <td>{{ order.order.order_date }}</td>
+                        {% for total in totals %}
+                          {% if total.id == order.id %}
+                             <td>{{total.totals}}</td>
+                          {% endif %}
+                        {% endfor %}
                         
-                        {% if order.order_status == 'pending' %}
+                        {% if order.order.order_status == 'pending' %}
                         <td><small class="btn bg-info shadow-none text-light">Pending</small></td>
                         {%else%}
                         <td><small class="btn btn-success">Fulfilled</small></td>
@@ -41,7 +45,6 @@
                     
                 </tbody>
             </table>
-        
     </div>
 
 </div>
