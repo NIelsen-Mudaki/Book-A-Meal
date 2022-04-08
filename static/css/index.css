@@ -95,10 +95,13 @@ body{
 }
 /*  */
 .fullbody{
-    height: 93vh;
+
+    /* height: 92vh; */
+    height:calc(100vh - 44px);
 }
 .content{
-    height: 93vh;
+    height: 92vh;
+
     overflow-y: scroll;
     overflow-x: hidden;
 }

@@ -1,7 +1,6 @@
-{% extends 'base_copy.html' %} {% load static %} {% load django_bootstrap5 %}
+{% extends 'base.html' %} {% load static %} {% load django_bootstrap5 %}
 
 {%block styles %} {{block.super}} {% bootstrap_css %}
-<link rel="stylesheet" href="{% static 'menucss/index.css' %}" />
 {% endblock %} {% block body %}
 <div class="d-flex">
   <div class="navbar" id="navbarmenu align-items-start">
@@ -11,8 +10,8 @@
     <div class="container">
       <div class="card mt-5 menu-form-card border-0">
         
-        <h5 class="px-3 green fw-bold">Manage Menu / <span>Edit Menu Item</span></h5>
-     
+        <div class="current_tab px-3">Manage Menu / <span>Edit Menu Item</span></div>
+        
         <form
           action="{% url 'editmenu' menu.id %}"
           class=""
@@ -84,7 +83,7 @@
             <div class="col-12">
               <input
                 type="submit"
-                value="Add Menu"
+                value="Edit Menu"
                 class="btn m-3 submit-menu mx-0"
                 id="greensubmit"
               />
@@ -101,7 +100,7 @@
           <p>{{menu.description}}</p>
           <p>Ksh. {{menu.price}}</p>
           <a class="btn btn-secondary" href="{% url 'available' menu.id %}">Make Unavailable</a>
-          <a class="btn btn-danger" href="{% url 'delete_menu' menu.id %}">Delete</a>
+          <!-- <a class="btn btn-danger" href="{% url 'delete_menu' menu.id %}">Delete</a> -->
           
 
          </div>
