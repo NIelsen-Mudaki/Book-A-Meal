@@ -8,10 +8,13 @@
   </div>
   <div class="main content">
     <div class="container">
-      <div class="card mt-0 menu-form-card border-0">
-        <h5 class="p-1 green">Manage Menu /</h5>
-        <div class="d-flex justify-content-between">
-          <h5 class="green p-1">New Menu Item</h5>
+      <div class="d-flex justify-content-between align-items-center mb-2"><div class="current_tab my-2">Manage Menu /</div>   
+      <!-- <button class="greenbtn btn" id="openmenuform" type="button">Add Menu</button> -->
+
+    </div>
+      <div class="card mt-0 menu-form-card border-0 shadow p-2" id="menuform">        
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="green">New Menu Item</h5>
           <div class="green p-1">
             <form
               action="{% url 'menu' %}"
@@ -116,7 +119,7 @@
         {% for menu in activemenuitems %}
 
         <div class="col-12 col-md-6 col-lg-6">
-          <div class="card d-flex p-3 mb-2 flex-row justify-content-between">
+          <div class="card d-flex p-lg-3 p-1 mb-2 flex-row flex-column-reverse flex-md-row justify-content-between align-items-center">
             <div>
               <h3>{{menu.meal}}</h3>
               <p>{{menu.description}}</p>
@@ -158,7 +161,7 @@
         {% for menu in inactivemenuitems %}
         <div class="col-12 col-md-6 col-lg-6">
           <div
-            class="card d-flex p-3 mb-2 flex-row justify-content-between text-muted"
+            class="card meal-card d-flex p-lg-3 p-1 mb-2 flex-column-reverse flex-md-row flex-lg-row justify-content-between text-muted align-items-center"
           >
             <div class="buttonsmalls">
               <h3>{{menu.meal}}</h3>
