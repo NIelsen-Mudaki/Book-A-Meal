@@ -11,11 +11,17 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <script src="{% static 'js/index.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
+    <link rel="stylesheet" href="{% static 'menucss/index.css' %}" />
+
     <script src="{% static 'js/calendar.js' %}"></script>
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
     {% block body %}
+
+    {% endblock %}
+
+    {% block scripts %}
 
     {% endblock %}
 </body>

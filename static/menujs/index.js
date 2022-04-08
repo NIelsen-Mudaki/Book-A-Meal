@@ -9,4 +9,6 @@ $(() => {
     localStorage.setItem("activedate", selected_date);
     $("#menudatepicker").submit();
   });
+
 });
+
