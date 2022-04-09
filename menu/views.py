@@ -48,6 +48,7 @@ def menu(request):
       'activemenuitems': active_menu_items,
       'inactivemenuitems': inactive_menu_items,
       'menudate': current_date_str,
+      'active_date':active_date
   }
   return render(request, 'admin-menu/admin-menu.html', context)
 
