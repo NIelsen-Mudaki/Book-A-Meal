@@ -1,10 +1,13 @@
 from django.shortcuts import redirect, render
+
+from customer.models import Customer
 from .forms import MenuForm
 from .models import Menu, MenuDate
-from django.http import JsonResponse, response
+from django.http import HttpResponse, JsonResponse, response
 import datetime
 # Create your views here.
-
+# from email.request import send_email
+from request import send_email
 
 def menu(request):
   try:
@@ -143,3 +146,11 @@ def delete_menu(request, id):
     target_menu = Menu.objects.filter(id=id).first()
     target_menu.delete_menu()
     return redirect('menu')
+
+def notify_menu(request):
+    recipients=Customer.objects.values('email')
+    recipients_emails=list(i['email'] for i in recipients)
+    print(recipients_emails)
+    send_email(recipients_emails)
+    # return redirect('menu')
+    return HttpResponse('Email notifications sent')
