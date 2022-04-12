@@ -95,7 +95,8 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'rest_framework',
     'corsheaders',
-    'api'
+    'api',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
