@@ -174,12 +174,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
+    'https://nielsen-mudaki.github.io',
 ]
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:4200',
+    'https://nielsen-mudaki.github.io'
 )
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:4200',
+    'https://nielsen-mudaki.github.io'
 ]
 CORS_ALLOW_CREDENTIALS = True
 

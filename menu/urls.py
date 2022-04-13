@@ -6,6 +6,7 @@ urlpatterns=[
   re_path('^unavailable/(.*)',views.make_unavailable,name='make_unavailable'),
   re_path('delete/(.*)',views.delete_menu,name='delete_menu'),
   re_path('edit/(.*)',views.edit_menu,name='editmenu'),
+  path('notify',views.notify_menu,name='sendnotification'),
   path('',views.menu,name='menu')
 
 
