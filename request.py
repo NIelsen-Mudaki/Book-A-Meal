@@ -26,4 +26,3 @@ def send_email(recipients):
     except Exception as e:
         print(e.message)
 
-# send_email(['francizgithae@gmail.com','francis.githae@student.moringaschool.com'])
