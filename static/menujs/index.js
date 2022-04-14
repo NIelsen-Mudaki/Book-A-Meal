@@ -10,16 +10,6 @@ $(() => {
     $("#menudatepicker").submit();
   });
 
-$('#notify').click((e)=>{
-  e.preventDefault()
-  $.ajax(
-    {
-      url:"/menu/notify",
-      success:(()=>{alert('email notification sent');})
-    }
-  );
-  return
-})
 
 
 });

@@ -6,7 +6,6 @@ from .models import Menu, MenuDate
 from django.http import HttpResponse, JsonResponse, response
 import datetime
 # Create your views here.
-# from email.request import send_email
 from request import send_email
 
 def menu(request):
@@ -152,5 +151,4 @@ def notify_menu(request):
     recipients_emails=list(i['email'] for i in recipients)
     print(recipients_emails)
     send_email(recipients_emails)
-    # return redirect('menu')
-    return HttpResponse('Email notifications sent')
+    return redirect('menu')

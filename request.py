@@ -17,6 +17,7 @@ def send_email(recipients):
         subject='Brasserie Menu',
         html_content='<strong>Our Menu is ready.Please head to our site and check it out</strong>',
         is_multiple=True)
+
     try:
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         response = sg.send(message)
@@ -26,4 +27,3 @@ def send_email(recipients):
     except Exception as e:
         print(e.message)
 
-# send_email(['francizgithae@gmail.com','francis.githae@student.moringaschool.com'])

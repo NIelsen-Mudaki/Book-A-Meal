@@ -19,7 +19,7 @@ from decouple import config,Csv
 
 MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG=config('DEBUG')
 # development
 if config('MODE')=="dev":
     DATABASES = {
@@ -70,9 +70,9 @@ cloudinary.config(
 #SECRET_KEY = 'django-insecure-9_@=wd^hr)2rg&r*pcgv8_91)^ky%#athefo8%^wffec_caq2d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -95,7 +95,8 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'rest_framework',
     'corsheaders',
-    'api'
+    'api',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +132,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'reservation.wsgi.application'
 
+REST_FRAMEWORK = {
+  
+  'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
