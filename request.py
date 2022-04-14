@@ -15,7 +15,8 @@ def send_email(recipients):
         from_email='bookamealtoday@gmail.com',
         to_emails=recipients,
         subject='Brasserie Menu',
-        html_content='<strong>Our Menu is ready.Please head to our site and check it out</strong>')
+        html_content='<strong>Our Menu is ready.Please head to our site and check it out</strong>',
+        is_multiple=True)
     try:
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         response = sg.send(message)
