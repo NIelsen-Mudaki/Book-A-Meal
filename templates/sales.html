@@ -21,12 +21,12 @@
             
             <tbody>
         
-                {% for order in orders %}
+                {% for order in orderitems %}
                 <tr>
                     <td>{{order.id}}</td>
-                    <td>{{order.customer_id.customer_name}}</td>
+                    <td>{{order.order.customer_id.customer_name}}</td>
                     <td>{{order.menu_id.meal}}</td>
-                    <td>{{order.order_date}}</td>
+                    <td>{{order.order.order_date}}</td>
                     <td>{{order.quantity}}</td>
                     <td>{{order.menu_id.price}}</td>
                     <td>{{order.quantity|product:order.menu_id.price|currency}}</td>

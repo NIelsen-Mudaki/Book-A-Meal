@@ -28,6 +28,8 @@ def orders(request):
 
 def order_history(request):
     orders = Orders.get_all_orders()
+    order_items=OrderItem.objects.all()
+    print(order_items)
     error = ''
     if request.method == 'POST':
         search_date = request.POST['order_date']
@@ -42,6 +44,8 @@ def order_history(request):
     context = {
         'orders' : orders,
         'error': error,
+        'orderitems':order_items
+
     }
     return render(request, 'order-history.html',context)
 
